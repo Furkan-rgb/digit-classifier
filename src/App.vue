@@ -30,7 +30,7 @@
       <div class="pipeline-column">
         <!-- CNN Overview (vertical stacking, smaller spacing) -->
         <div class="cnn-overview vertical">
-          <!-- 1) INPUT NODE -->
+          <!-- 1) INPUT LAYER (single node) -->
           <div class="layer input-layer">
             <div class="single-node">Input</div>
           </div>
@@ -59,7 +59,7 @@
             ></div>
           </div>
 
-          <!-- Lines: Conv16 (16 filters) -> Pool1 (single node) -->
+          <!-- Lines: Conv16 -> Pool1 (single node) -->
           <svg class="connections">
             <line
               v-for="n in 16"
@@ -78,7 +78,7 @@
             <div class="single-node">MaxPool(2×2)</div>
           </div>
 
-          <!-- Lines: Pool1 (single node) -> Conv32 (32 filters) -->
+          <!-- Lines: Pool1 -> Conv32 (32 filters) -->
           <svg class="connections">
             <line
               v-for="n in 32"
@@ -102,7 +102,7 @@
             ></div>
           </div>
 
-          <!-- Lines: Conv32 (32 filters) -> Pool2 (single node) -->
+          <!-- Lines: Conv32 -> Pool2 (single node) -->
           <svg class="connections">
             <line
               v-for="n in 32"
@@ -130,8 +130,9 @@
               y1="0"
               :x2="((idx + 0.5) / probabilities.length) * 100 + '%'"
               y2="100%"
-              stroke="#666"
-              stroke-width="1"
+              :stroke="getGaugeLineColor(val)"
+              :style="{ strokeWidth: getGaugeLineWidth(val) }"
+              :class="{ pulsing: drawingActive }"
             />
           </svg>
         </div>
@@ -171,24 +172,24 @@
     </p>
     <ul>
       <li>
-        <strong>Convolution + MaxPooling:</strong> We use two convolutional
+        <strong>Convolution + MaxPooling:</strong> I've used two convolutional
         blocks (16 and 32 filters) to extract features, each followed by a 2×2
         MaxPooling layer to reduce spatial dimensions.
       </li>
       <li>
-        <strong>Flatten + Dense Layer:</strong> We flatten the output of the
+        <strong>Flatten + Dense Layer:</strong> Then I flatten the output of the
         last convolution block and feed it into a <code>Dense</code> layer with
         10 units for final classification.
       </li>
       <li>
-        <strong>Data Augmentation:</strong> On the training set, we apply random
-        rotation, translation, zoom, and contrast adjustments to increase the
-        variety of inputs and improve generalization.
+        <strong>Data Augmentation:</strong> On the training set, a random
+        rotation, translation, zoom, and contrast adjustments are applied to
+        increase the variety of inputs and improve generalization.
       </li>
     </ul>
     <p>
       Below is the <strong>exact Python code</strong> used to build and train
-      this model. After training, we converted it to the
+      this model. After training, the model is converted to
       <code>TensorFlow.js</code> format so it can run directly in your browser:
     </p>
     <div class="code-container">
@@ -278,10 +279,8 @@ if __name__ == "__main__":
       </code></pre>
     </div>
     <p>
-      Finally, we load this model (<code>model.json</code>) on the front end and
-      run inference on the drawing you create in the canvas above. This
-      demonstrates the power of <strong>TensorFlow.js</strong> to do deep
-      learning inference <em>in-browser</em>.
+      Finally, the model is loaded (<code>model.json</code>) on the front end
+      and run inference on the drawing you create in the canvas.
     </p>
   </section>
 </template>
@@ -289,6 +288,9 @@ if __name__ == "__main__":
 <script setup>
 import { ref, onMounted, nextTick } from "vue";
 import * as tf from "@tensorflow/tfjs";
+
+// Track whether user is actively drawing right now
+const drawingActive = ref(false);
 
 const canvasWidth = 280;
 const canvasHeight = 280;
@@ -324,6 +326,7 @@ onMounted(async () => {
 
 function startDrawing(e) {
   if (!ctx) return;
+  drawingActive.value = true; // <--- Set to TRUE when drawing starts
   drawing = true;
   ctx.beginPath();
   ctx.moveTo(e.offsetX, e.offsetY);
@@ -344,6 +347,7 @@ function draw(e) {
 }
 
 function stopDrawing() {
+  drawingActive.value = false; // <--- Set to FALSE when drawing stops
   drawing = false;
   runInference();
 }
@@ -490,6 +494,30 @@ function drawActivationMapsOnCanvas() {
     });
   });
 }
+
+/**
+ * Returns a color interpolated between two colors based on prob (0..1).
+ * Example: from #ccc when prob=0 to #2196f3 when prob=1.
+ */
+function getGaugeLineColor(prob) {
+  const startColor = [204, 204, 204]; // #ccc
+  const endColor = [33, 150, 243]; // #2196f3
+
+  const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * prob);
+  const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * prob);
+  const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * prob);
+
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+/**
+ * Returns a stroke width between 1px (prob=0) and 4px (prob=1).
+ */
+function getGaugeLineWidth(prob) {
+  const minW = 1;
+  const maxW = 4;
+  return minW + (maxW - minW) * prob + "px";
+}
 </script>
 
 <style scoped>
@@ -502,14 +530,15 @@ function drawActivationMapsOnCanvas() {
   font-family: sans-serif;
 }
 
-/* Main layout */
+/* .main-layout just centers the two columns side-by-side */
 .main-layout {
-  /* Removed 'flex-wrap: wrap;' so columns stay side by side */
   display: flex;
   gap: 2rem;
-  align-items: flex-start; /* Ensures top alignment if columns differ in height */
+  align-items: flex-start;
+  justify-content: center; /* Center them horizontally */
 }
 
+/* Column with the canvas/drawing */
 .canvas-column {
   flex: 0 0 auto;
   min-width: 280px;
@@ -525,25 +554,41 @@ function drawActivationMapsOnCanvas() {
   font-weight: bold;
 }
 
+/* Column with CNN overview + digit gauges */
 .pipeline-column {
   flex: 0 0 auto;
   min-width: 300px;
 }
 
-/* CNN Overview (vertical, smaller spacing) */
+/* CNN Overview container */
 .cnn-overview.vertical {
+  width: 100%; /* Let it span the entire .pipeline-column width */
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
 
-/* Each “layer” block */
+/* Each layer container */
 .layer {
-  margin: 0.2rem 0; /* smaller vertical margin */
+  margin: 0.2rem 0; /* Small vertical spacing between layers */
+}
+
+/* Single-node layers: just center the node horizontally */
+.layer.input-layer,
+.layer.pool1-layer,
+.layer.pool2-layer {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: center; /* single node in center */
+}
+
+/* Multi-filter layers: spread out the dots across the full width */
+.layer.conv16-layer,
+.layer.conv32-layer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Single node (Input, Pool, etc.) */
@@ -556,7 +601,7 @@ function drawActivationMapsOnCanvas() {
   font-weight: bold;
 }
 
-/* Represent filters as small circular dots */
+/* Filter dots */
 .filter-dot {
   width: 6px;
   height: 6px;
@@ -565,16 +610,16 @@ function drawActivationMapsOnCanvas() {
   margin: 2px;
 }
 
-/* Vertical connections between layers, smaller height, thinner line */
+/* The SVG that draws lines between layers */
 .connections {
-  width: 120px;
-  height: 30px; /* smaller gap to reduce total height */
-  overflow: visible;
+  width: 100%; /* Key: match layer width so percentages align */
+  height: 40px; /* Adjust as needed for spacing */
+  overflow: visible; /* Let lines extend outside the box if needed */
 }
 
 /* Probability Gauges */
 .digit-gauges {
-  margin: 2rem 0 1rem;
+  margin: 0rem 0 1rem;
   display: flex;
   gap: 12px;
   justify-content: center;
@@ -592,7 +637,7 @@ function drawActivationMapsOnCanvas() {
 .digit-bar-outer {
   position: relative;
   width: 100%;
-  height: 80px; /* smaller if you want less vertical space */
+  height: 80px; /* Adjust if you want less or more vertical space */
   background: #eee;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -634,6 +679,8 @@ function drawActivationMapsOnCanvas() {
   display: block;
   border: 1px solid #999;
 }
+
+/* Explanations and Code Sections */
 .explanations {
   margin-top: 2rem;
   text-align: left;
@@ -643,13 +690,12 @@ function drawActivationMapsOnCanvas() {
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* A container for your code snippet; tweak to your liking. */
 .code-container {
   background-color: #f5f5f5;
   padding: 1rem;
   margin-top: 1rem;
   border-radius: 6px;
-  overflow-x: auto; /* Horizontal scrolling for wide code. */
+  overflow-x: auto; /* Horizontal scrolling for wide code */
 }
 
 .code-container pre {
