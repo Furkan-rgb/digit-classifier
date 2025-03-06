@@ -14554,7 +14554,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class tj{constructor(t){this.variableNames=["A"],this.customUniforms=[{name:"minVal",type:"float"},{name:"maxVal",type:"float"}],this.outputShape=t,this.userCode=`
+ */class t6{constructor(t){this.variableNames=["A"],this.customUniforms=[{name:"minVal",type:"float"},{name:"maxVal",type:"float"}],this.outputShape=t,this.userCode=`
 
       void main() {
         float value = getAAtOutCoords();
@@ -14580,7 +14580,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class ej{constructor(t){this.variableNames=["A"],this.packedInputs=!0,this.packedOutput=!0,this.customUniforms=[{name:"minVal",type:"float"},{name:"maxVal",type:"float"}],this.outputShape=t,this.userCode=`
+ */class e6{constructor(t){this.variableNames=["A"],this.packedInputs=!0,this.packedOutput=!0,this.customUniforms=[{name:"minVal",type:"float"},{name:"maxVal",type:"float"}],this.outputShape=t,this.userCode=`
       void main() {
         vec4 value = getAAtOutCoords();
 
@@ -14606,7 +14606,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function nj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o}=t,{clipValueMin:r,clipValueMax:i}=s;let a;H().getBool("WEBGL_PACK_CLIP")?a=new ej(o.shape):a=new tj(o.shape);const l=[[r],[i]];return e.runWebGLProgram(a,[o],o.dtype,l)}const sj={kernelName:ua,backendName:"webgl",kernelFunc:nj};/**
+ */function n6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o}=t,{clipValueMin:r,clipValueMax:i}=s;let a;H().getBool("WEBGL_PACK_CLIP")?a=new e6(o.shape):a=new t6(o.shape);const l=[[r],[i]];return e.runWebGLProgram(a,[o],o.dtype,l)}const s6={kernelName:ua,backendName:"webgl",kernelFunc:n6};/**
  * @license
  * Copyright 2018 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14621,7 +14621,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class oj{constructor(t){this.variableNames=["real","imag"],this.outputShape=t,this.userCode=`
+ */class o6{constructor(t){this.variableNames=["real","imag"],this.outputShape=t,this.userCode=`
       void main() {
         float re = abs(getRealAtOutCoords());
         float im = abs(getImagAtOutCoords());
@@ -14649,7 +14649,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Jx(n,t){return{dataId:t.dataId,dtype:t.dtype,shape:n.shape}}function rj(n){const{inputs:t,backend:e}=n,{x:s}=t,o=e.texData.get(s.dataId),r=new oj(s.shape),i=[Jx(s,o.complexTensorInfos.real),Jx(s,o.complexTensorInfos.imag)];return e.runWebGLProgram(r,i,i[0].dtype)}const ij={kernelName:Xc,backendName:"webgl",kernelFunc:rj};/**
+ */function Jx(n,t){return{dataId:t.dataId,dtype:t.dtype,shape:n.shape}}function r6(n){const{inputs:t,backend:e}=n,{x:s}=t,o=e.texData.get(s.dataId),r=new o6(s.shape),i=[Jx(s,o.complexTensorInfos.real),Jx(s,o.complexTensorInfos.imag)];return e.runWebGLProgram(r,i,i[0].dtype)}const i6={kernelName:Xc,backendName:"webgl",kernelFunc:r6};/**
  * @license
  * Copyright 2017 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14664,7 +14664,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class aj{constructor(t){this.outputShape=[],this.outputShape=vs(t,1),this.variableNames=t.map((i,a)=>`T${a}`);const e=new Array(t.length-1);e[0]=t[0][1];for(let i=1;i<e.length;i++)e[i]=e[i-1]+t[i][1];const s=[`if (yC < ${e[0]}) setOutput(getT0(yR, yC));`];for(let i=1;i<e.length;i++){const a=e[i-1];s.push(`else if (yC < ${e[i]}) setOutput(getT${i}(yR, yC-${a}));`)}const o=e.length,r=e[e.length-1];s.push(`else setOutput(getT${o}(yR, yC-${r}));`),this.userCode=`
+ */class a6{constructor(t){this.outputShape=[],this.outputShape=vs(t,1),this.variableNames=t.map((i,a)=>`T${a}`);const e=new Array(t.length-1);e[0]=t[0][1];for(let i=1;i<e.length;i++)e[i]=e[i-1]+t[i][1];const s=[`if (yC < ${e[0]}) setOutput(getT0(yR, yC));`];for(let i=1;i<e.length;i++){const a=e[i-1];s.push(`else if (yC < ${e[i]}) setOutput(getT${i}(yR, yC-${a}));`)}const o=e.length,r=e[e.length-1];s.push(`else setOutput(getT${o}(yR, yC-${r}));`),this.userCode=`
       void main() {
         ivec2 coords = getOutputCoords();
         int yR = coords.x;
@@ -14688,7 +14688,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class lj{constructor(t,e){this.packedInputs=!0,this.packedOutput=!0,this.outputShape=[],this.outputShape=vs(t,e);const s=this.outputShape,o=s.length,r=te(o),i=tn("coords",o),a=["x","y","z","w","u","v"].slice(0,o);this.variableNames=t.map((m,g)=>`T${g}`);const l=new Array(t.length-1);l[0]=t[0][e];for(let m=1;m<l.length;m++)l[m]=l[m-1]+t[m][e];const c=a[e],u=a.slice(-2),h=a.join();let d=`if (${c} < ${l[0]}) {
+ */class l6{constructor(t,e){this.packedInputs=!0,this.packedOutput=!0,this.outputShape=[],this.outputShape=vs(t,e);const s=this.outputShape,o=s.length,r=te(o),i=tn("coords",o),a=["x","y","z","w","u","v"].slice(0,o);this.variableNames=t.map((m,g)=>`T${g}`);const l=new Array(t.length-1);l[0]=t[0][e];for(let m=1;m<l.length;m++)l[m]=l[m-1]+t[m][e];const c=a[e],u=a.slice(-2),h=a.join();let d=`if (${c} < ${l[0]}) {
         return getChannel(
             getT0(${h}), vec2(${u.join()}));
         }`;for(let m=1;m<l.length;m++){const g=l[m-1];d+=`
@@ -14740,7 +14740,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function mh(n){const{inputs:t,backend:e}=n,{input:s}=t,o=e.texData.get(s.dataId);return In({inputs:{x:o.complexTensorInfos.imag},backend:e})}const cj={kernelName:Mf,backendName:"webgl",kernelFunc:mh};/**
+ */function mh(n){const{inputs:t,backend:e}=n,{input:s}=t,o=e.texData.get(s.dataId);return In({inputs:{x:o.complexTensorInfos.imag},backend:e})}const c6={kernelName:Mf,backendName:"webgl",kernelFunc:mh};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14755,7 +14755,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function $i(n,t,e){const s=n[0].dtype;if(s==="complex64"){const f=n.map(b=>bl({inputs:{input:b},backend:e})),p=n.map(b=>mh({inputs:{input:b},backend:e})),m=$i(f,t,e),g=$i(p,t,e),x=To({inputs:{real:m,imag:g},backend:e});return f.forEach(b=>e.disposeIntermediateTensorInfo(b)),p.forEach(b=>e.disposeIntermediateTensorInfo(b)),e.disposeIntermediateTensorInfo(m),e.disposeIntermediateTensorInfo(g),x}let o=e.shouldExecuteOnCPU(n);if(s==="string"&&(o=!0),o){const f=n.map(y=>{const $=[-1,X(y.shape.slice(t))];return ht({inputs:{x:y},backend:e,attrs:{shape:$}})}),p=f.map(y=>({vals:e.readSync(y.dataId),shape:y.shape})),m=vs(f.map(y=>y.shape),1),g=f[0].shape[0]===1,x=Q4(p,m,s,g),b=vs(n.map(y=>y.shape),t),w=e.makeTensorInfo(b,s,x);return f.forEach(y=>e.disposeIntermediateTensorInfo(y)),w}const r=n.filter(f=>X(f.shape)>0),i=H().getBool("WEBGL_PACK_ARRAY_OPERATIONS")&&r[0].shape.length>1;if(r.length===1){const f=i?new xs(n[0].shape,Zs):new eo(n[0].shape,Zs);return e.runWebGLProgram(f,n,s)}const a=H().getNumber("WEBGL_MAX_TEXTURES_IN_SHADER");if(r.length>a){const f=[];for(let m=0;m<r.length;m+=a){const g=r.slice(m,m+a);f.push($i(g,t,e))}const p=$i(f,t,e);for(const m of f)e.disposeIntermediateTensorInfo(m);return p}if(i){const f=new lj(r.map(p=>p.shape),t);return e.runWebGLProgram(f,r,s)}const{tensors2D:l,outShape:c}=uj(r,t,e),u=new aj(l.map(f=>f.shape)),h=e.runWebGLProgram(u,l,s);l.forEach(f=>e.disposeIntermediateTensorInfo(f));const d=ht({inputs:{x:h},attrs:{shape:c},backend:e});return e.disposeIntermediateTensorInfo(h),d}function uj(n,t,e){const s=vs(n.map(r=>r.shape),t);return{tensors2D:n.map(r=>ht({inputs:{x:r},attrs:{shape:[-1,X(r.shape.slice(t))]},backend:e})),outShape:s}}/**
+ */function $i(n,t,e){const s=n[0].dtype;if(s==="complex64"){const f=n.map(b=>bl({inputs:{input:b},backend:e})),p=n.map(b=>mh({inputs:{input:b},backend:e})),m=$i(f,t,e),g=$i(p,t,e),x=To({inputs:{real:m,imag:g},backend:e});return f.forEach(b=>e.disposeIntermediateTensorInfo(b)),p.forEach(b=>e.disposeIntermediateTensorInfo(b)),e.disposeIntermediateTensorInfo(m),e.disposeIntermediateTensorInfo(g),x}let o=e.shouldExecuteOnCPU(n);if(s==="string"&&(o=!0),o){const f=n.map(y=>{const $=[-1,X(y.shape.slice(t))];return ht({inputs:{x:y},backend:e,attrs:{shape:$}})}),p=f.map(y=>({vals:e.readSync(y.dataId),shape:y.shape})),m=vs(f.map(y=>y.shape),1),g=f[0].shape[0]===1,x=Q4(p,m,s,g),b=vs(n.map(y=>y.shape),t),w=e.makeTensorInfo(b,s,x);return f.forEach(y=>e.disposeIntermediateTensorInfo(y)),w}const r=n.filter(f=>X(f.shape)>0),i=H().getBool("WEBGL_PACK_ARRAY_OPERATIONS")&&r[0].shape.length>1;if(r.length===1){const f=i?new xs(n[0].shape,Zs):new eo(n[0].shape,Zs);return e.runWebGLProgram(f,n,s)}const a=H().getNumber("WEBGL_MAX_TEXTURES_IN_SHADER");if(r.length>a){const f=[];for(let m=0;m<r.length;m+=a){const g=r.slice(m,m+a);f.push($i(g,t,e))}const p=$i(f,t,e);for(const m of f)e.disposeIntermediateTensorInfo(m);return p}if(i){const f=new l6(r.map(p=>p.shape),t);return e.runWebGLProgram(f,r,s)}const{tensors2D:l,outShape:c}=u6(r,t,e),u=new a6(l.map(f=>f.shape)),h=e.runWebGLProgram(u,l,s);l.forEach(f=>e.disposeIntermediateTensorInfo(f));const d=ht({inputs:{x:h},attrs:{shape:c},backend:e});return e.disposeIntermediateTensorInfo(h),d}function u6(n,t,e){const s=vs(n.map(r=>r.shape),t);return{tensors2D:n.map(r=>ht({inputs:{x:r},attrs:{shape:[-1,X(r.shape.slice(t))]},backend:e})),outShape:s}}/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14770,7 +14770,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function _$(n){const{inputs:t,backend:e,attrs:s}=n,{axis:o}=s,r=Pt(o,t[0].shape)[0],i=t.map(c=>c.shape);Vp(i,r);const a=vs(t.map(c=>c.shape),r);if(X(a)===0)return e.makeTensorInfo(a,t[0].dtype,[]);const l=t.filter(c=>X(c.shape)>0);return l.length===1?In({inputs:{x:l[0]},backend:e}):$i(l,r,e)}const hj={kernelName:Yc,backendName:"webgl",kernelFunc:_$};/**
+ */function _$(n){const{inputs:t,backend:e,attrs:s}=n,{axis:o}=s,r=Pt(o,t[0].shape)[0],i=t.map(c=>c.shape);Vp(i,r);const a=vs(t.map(c=>c.shape),r);if(X(a)===0)return e.makeTensorInfo(a,t[0].dtype,[]);const l=t.filter(c=>X(c.shape)>0);return l.length===1?In({inputs:{x:l[0]},backend:e}):$i(l,r,e)}const h6={kernelName:Yc,backendName:"webgl",kernelFunc:_$};/**
  * @license
  * Copyright 2017 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14919,7 +14919,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
         ${C}
         setOutput(result);
       }
-    `}}class dj{constructor(t){this.variableNames=["x","W"],this.outputShape=t.outShape;const e=t.padInfo.front,s=t.padInfo.top,o=t.padInfo.left,r=t.strideDepth,i=t.strideHeight,a=t.strideWidth,l=t.dilationDepth,c=t.dilationHeight,u=t.dilationWidth,h=t.filterDepth,d=t.filterHeight,f=t.filterWidth,p=Math.floor(t.inChannels/4)*4,m=t.inChannels%4;this.userCode=`
+    `}}class d6{constructor(t){this.variableNames=["x","W"],this.outputShape=t.outShape;const e=t.padInfo.front,s=t.padInfo.top,o=t.padInfo.left,r=t.strideDepth,i=t.strideHeight,a=t.strideWidth,l=t.dilationDepth,c=t.dilationHeight,u=t.dilationWidth,h=t.filterDepth,d=t.filterHeight,f=t.filterWidth,p=Math.floor(t.inChannels/4)*4,m=t.inChannels%4;this.userCode=`
       const ivec3 strides = ivec3(${r}, ${i}, ${a});
       const ivec3 pads = ivec3(${e}, ${s}, ${o});
 
@@ -15233,7 +15233,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class fj{constructor(t,e){this.variableNames=["A"],this.packedInputs=!0,this.packedOutput=!0,this.customUniforms=[{name:"inputShape",type:"ivec4"},{name:"pad",type:"ivec2"},{name:"stride",type:"ivec2"},{name:"dilation",type:"ivec2"},{name:"inChannels",type:"int"},{name:"itemsPerBlockRow",type:"int"},{name:"outWidth",type:"int"}],this.outputShape=t,this.enableShapeUniforms=Xe(this.outputShape.length);const{dataFormat:s}=e,o=on(),r=s==="channelsLast",i=r?1:2,a=r?2:3,l=this.enableShapeUniforms?"if(blockIndex < outShape[2] && pos < outShape[1]) {":`if(blockIndex < ${t[2]} && pos < ${t[1]}) {`;let c="";for(let u=0;u<=1;u++)for(let h=0;h<=1;h++)c+=`
+ */class f6{constructor(t,e){this.variableNames=["A"],this.packedInputs=!0,this.packedOutput=!0,this.customUniforms=[{name:"inputShape",type:"ivec4"},{name:"pad",type:"ivec2"},{name:"stride",type:"ivec2"},{name:"dilation",type:"ivec2"},{name:"inChannels",type:"int"},{name:"itemsPerBlockRow",type:"int"},{name:"outWidth",type:"int"}],this.outputShape=t,this.enableShapeUniforms=Xe(this.outputShape.length);const{dataFormat:s}=e,o=on(),r=s==="channelsLast",i=r?1:2,a=r?2:3,l=this.enableShapeUniforms?"if(blockIndex < outShape[2] && pos < outShape[1]) {":`if(blockIndex < ${t[2]} && pos < ${t[1]}) {`;let c="";for(let u=0;u<=1;u++)for(let h=0;h<=1;h++)c+=`
           blockIndex = rc.z + ${h};
           pos = rc.y + ${u};
 
@@ -15295,7 +15295,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Rc(n,t){const e=n.length;return e>=3?t?[...n.slice(0,-3),n[e-3]*n[e-2],n[e-1]]:[...n.slice(0,-3),n[e-3],n[e-2]*n[e-1]]:!t&&e===1&&n[0]>1?[n[0],1]:null}function L$({x:n,filter:t,convInfo:e,backend:s,bias:o=null,preluActivationWeights:r=null,leakyreluAlpha:i=0,activation:a=null}){const l=n.shape,c=s.texData.get(n.dataId),u=e.inChannels,h=l[0]*l[1]*l[2],d=e.outChannels,f=e.dataFormat==="channelsLast",p=!1,m=!1;let g;const x=[];if(r!=null){const y=Rc(r.shape,f);y!=null&&(r=ht({inputs:{x:r},backend:s,attrs:{shape:y}}),x.push(r))}if(o!=null){const y=Rc(o.shape,f);y!=null&&(o=ht({inputs:{x:o},backend:s,attrs:{shape:y}}),x.push(o))}if(!((h===1||d===1)&&u>T$)&&c.isPacked&&f&&c.texture!=null&&l[2]%2!==0&&Kt(c.shape.slice(-3),l.slice(-3))){const y=l[0]*l[1]*(l[2]+1),C={dataId:n.dataId,shape:[1,y,e.inChannels],dtype:n.dtype},$=c.shape;c.shape=c.shape.slice(),c.shape[c.shape.length-2]++,N(Tc(c.shape,C.shape),()=>`packed reshape ${c.shape} to ${C.shape} isn't free`);const S=ht({inputs:{x:t},backend:s,attrs:{shape:[1,e.inChannels,e.outChannels]}});x.push(S);const T=Ec({a:C,b:S,backend:s,transposeA:p,transposeB:m,bias:o,activation:a,preluActivationWeights:r,leakyreluAlpha:i}),k=s.texData.get(T.dataId);N(k.isPacked,()=>"batchMatMul result is expected to be packed"),c.shape=$,k.shape=e.outShape,g=In({inputs:{x:T},backend:s}),g.shape=e.outShape,x.push(T)}else{const y=e.outHeight*e.outWidth,C=ht({inputs:{x:n},backend:s,attrs:{shape:f?[e.batchSize,y,e.inChannels]:[e.batchSize,e.inChannels,y]}}),$=ht({inputs:{x:t},backend:s,attrs:{shape:[1,e.inChannels,e.outChannels]}}),S=Ec({a:f?C:$,b:f?$:C,transposeA:!f,transposeB:m,backend:s,bias:o,activation:a,preluActivationWeights:r,leakyreluAlpha:i});g=ht({inputs:{x:S},backend:s,attrs:{shape:e.outShape}}),x.push(C),x.push($),x.push(S)}for(const y of x)s.disposeIntermediateTensorInfo(y);return g}function M$({x:n,filter:t,convInfo:e,backend:s,bias:o=null,preluActivationWeights:r=null,leakyreluAlpha:i=0,activation:a=null}){const{filterWidth:l,filterHeight:c,inChannels:u,outWidth:h,outHeight:d,dataFormat:f}=e,p=f==="channelsLast",m=l*c*u,g=d*h,x=[e.batchSize,m,g],b=!0,w=!1,y=[];if(r!=null){const z=Rc(r.shape,p);z!=null&&(r=ht({inputs:{x:r},backend:s,attrs:{shape:z}}),y.push(r))}if(o!=null){const z=Rc(o.shape,p);z!=null&&(o=ht({inputs:{x:o},backend:s,attrs:{shape:z}}),y.push(o))}const C=ht({inputs:{x:t},backend:s,attrs:{shape:[1,m,X(t.shape)/m]}});y.push(C);const $=new fj(x,e),S=[n.shape,[e.padInfo.top,e.padInfo.left],[e.strideHeight,e.strideWidth],[e.dilationHeight,e.dilationWidth],[e.inChannels],[e.filterWidth*e.inChannels],[e.outWidth]],T=s.runWebGLProgram($,[n],"float32",S),k=ht({inputs:{x:T},backend:s,attrs:{shape:x}});y.push(T),y.push(k);const I=o!=null,v=r!=null,A=a==="leakyrelu",L=a?Xi(a,!0):null,B=new N$(p?k.shape:C.shape,p?C.shape:k.shape,p?[e.batchSize,g,e.outChannels]:[e.batchSize,e.outChannels,g],b,w,I,L,v,A),F=p?[k,C]:[C,k];if(o&&F.push(o),v&&F.push(r),A){const z=s.makeTensorInfo([],"float32",yo(i,"float32"));F.push(z),y.push(z)}const P=s.runWebGLProgram(B,F,"float32"),U=ht({inputs:{x:P},backend:s,attrs:{shape:e.outShape}});y.push(P);for(const z of y)s.disposeIntermediateTensorInfo(z);return U}/**
+ */function Rc(n,t){const e=n.length;return e>=3?t?[...n.slice(0,-3),n[e-3]*n[e-2],n[e-1]]:[...n.slice(0,-3),n[e-3],n[e-2]*n[e-1]]:!t&&e===1&&n[0]>1?[n[0],1]:null}function L$({x:n,filter:t,convInfo:e,backend:s,bias:o=null,preluActivationWeights:r=null,leakyreluAlpha:i=0,activation:a=null}){const l=n.shape,c=s.texData.get(n.dataId),u=e.inChannels,h=l[0]*l[1]*l[2],d=e.outChannels,f=e.dataFormat==="channelsLast",p=!1,m=!1;let g;const x=[];if(r!=null){const y=Rc(r.shape,f);y!=null&&(r=ht({inputs:{x:r},backend:s,attrs:{shape:y}}),x.push(r))}if(o!=null){const y=Rc(o.shape,f);y!=null&&(o=ht({inputs:{x:o},backend:s,attrs:{shape:y}}),x.push(o))}if(!((h===1||d===1)&&u>T$)&&c.isPacked&&f&&c.texture!=null&&l[2]%2!==0&&Kt(c.shape.slice(-3),l.slice(-3))){const y=l[0]*l[1]*(l[2]+1),C={dataId:n.dataId,shape:[1,y,e.inChannels],dtype:n.dtype},$=c.shape;c.shape=c.shape.slice(),c.shape[c.shape.length-2]++,N(Tc(c.shape,C.shape),()=>`packed reshape ${c.shape} to ${C.shape} isn't free`);const S=ht({inputs:{x:t},backend:s,attrs:{shape:[1,e.inChannels,e.outChannels]}});x.push(S);const T=Ec({a:C,b:S,backend:s,transposeA:p,transposeB:m,bias:o,activation:a,preluActivationWeights:r,leakyreluAlpha:i}),k=s.texData.get(T.dataId);N(k.isPacked,()=>"batchMatMul result is expected to be packed"),c.shape=$,k.shape=e.outShape,g=In({inputs:{x:T},backend:s}),g.shape=e.outShape,x.push(T)}else{const y=e.outHeight*e.outWidth,C=ht({inputs:{x:n},backend:s,attrs:{shape:f?[e.batchSize,y,e.inChannels]:[e.batchSize,e.inChannels,y]}}),$=ht({inputs:{x:t},backend:s,attrs:{shape:[1,e.inChannels,e.outChannels]}}),S=Ec({a:f?C:$,b:f?$:C,transposeA:!f,transposeB:m,backend:s,bias:o,activation:a,preluActivationWeights:r,leakyreluAlpha:i});g=ht({inputs:{x:S},backend:s,attrs:{shape:e.outShape}}),x.push(C),x.push($),x.push(S)}for(const y of x)s.disposeIntermediateTensorInfo(y);return g}function M$({x:n,filter:t,convInfo:e,backend:s,bias:o=null,preluActivationWeights:r=null,leakyreluAlpha:i=0,activation:a=null}){const{filterWidth:l,filterHeight:c,inChannels:u,outWidth:h,outHeight:d,dataFormat:f}=e,p=f==="channelsLast",m=l*c*u,g=d*h,x=[e.batchSize,m,g],b=!0,w=!1,y=[];if(r!=null){const z=Rc(r.shape,p);z!=null&&(r=ht({inputs:{x:r},backend:s,attrs:{shape:z}}),y.push(r))}if(o!=null){const z=Rc(o.shape,p);z!=null&&(o=ht({inputs:{x:o},backend:s,attrs:{shape:z}}),y.push(o))}const C=ht({inputs:{x:t},backend:s,attrs:{shape:[1,m,X(t.shape)/m]}});y.push(C);const $=new f6(x,e),S=[n.shape,[e.padInfo.top,e.padInfo.left],[e.strideHeight,e.strideWidth],[e.dilationHeight,e.dilationWidth],[e.inChannels],[e.filterWidth*e.inChannels],[e.outWidth]],T=s.runWebGLProgram($,[n],"float32",S),k=ht({inputs:{x:T},backend:s,attrs:{shape:x}});y.push(T),y.push(k);const I=o!=null,v=r!=null,A=a==="leakyrelu",L=a?Xi(a,!0):null,B=new N$(p?k.shape:C.shape,p?C.shape:k.shape,p?[e.batchSize,g,e.outChannels]:[e.batchSize,e.outChannels,g],b,w,I,L,v,A),F=p?[k,C]:[C,k];if(o&&F.push(o),v&&F.push(r),A){const z=s.makeTensorInfo([],"float32",yo(i,"float32"));F.push(z),y.push(z)}const P=s.runWebGLProgram(B,F,"float32"),U=ht({inputs:{x:P},backend:s,attrs:{shape:e.outShape}});y.push(P);for(const z of y)s.disposeIntermediateTensorInfo(z);return U}/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15310,7 +15310,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function pj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r}=t,{strides:i,pad:a,dataFormat:l,dilations:c,dimRoundingMode:u}=s,h=js(l),d=Be(o.shape,r.shape,i,c,a,u,!1,h);let f;if(d.filterHeight===1&&d.filterWidth===1&&d.dilationHeight===1&&d.dilationWidth===1&&d.strideHeight===1&&d.strideWidth===1&&(d.padInfo.type==="SAME"||d.padInfo.type==="VALID"))f=L$({x:o,filter:r,convInfo:d,backend:e});else if(d.strideWidth<=2&&h==="channelsLast"&&H().getBool("WEBGL_EXP_CONV")){const m=new O$(d),g=[[d.padInfo.top,d.padInfo.left],[d.strideHeight,d.strideWidth],[d.dilationHeight,d.dilationWidth],[d.inHeight,d.inWidth]];f=e.runWebGLProgram(m,[o,r],"float32",g)}else if(H().getBool("WEBGL_CONV_IM2COL"))f=M$({x:o,filter:r,convInfo:d,backend:e});else{const m=new F$(d);f=e.runWebGLProgram(m,[o,r],"float32")}const p=ht({inputs:{x:f},backend:e,attrs:{shape:d.outShape}});return e.disposeIntermediateTensorInfo(f),p}const mj={kernelName:Zc,backendName:"webgl",kernelFunc:pj};/**
+ */function p6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r}=t,{strides:i,pad:a,dataFormat:l,dilations:c,dimRoundingMode:u}=s,h=js(l),d=Be(o.shape,r.shape,i,c,a,u,!1,h);let f;if(d.filterHeight===1&&d.filterWidth===1&&d.dilationHeight===1&&d.dilationWidth===1&&d.strideHeight===1&&d.strideWidth===1&&(d.padInfo.type==="SAME"||d.padInfo.type==="VALID"))f=L$({x:o,filter:r,convInfo:d,backend:e});else if(d.strideWidth<=2&&h==="channelsLast"&&H().getBool("WEBGL_EXP_CONV")){const m=new O$(d),g=[[d.padInfo.top,d.padInfo.left],[d.strideHeight,d.strideWidth],[d.dilationHeight,d.dilationWidth],[d.inHeight,d.inWidth]];f=e.runWebGLProgram(m,[o,r],"float32",g)}else if(H().getBool("WEBGL_CONV_IM2COL"))f=M$({x:o,filter:r,convInfo:d,backend:e});else{const m=new F$(d);f=e.runWebGLProgram(m,[o,r],"float32")}const p=ht({inputs:{x:f},backend:e,attrs:{shape:d.outShape}});return e.disposeIntermediateTensorInfo(f),p}const m6={kernelName:Zc,backendName:"webgl",kernelFunc:p6};/**
  * @license
  * Copyright 2017 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15325,7 +15325,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class gj{constructor(t){this.variableNames=["x","dy"],this.outputShape=t.filterShape;const e=t.strideHeight,s=t.strideWidth,o=t.padInfo.top,r=t.padInfo.left,i=t.dataFormat==="channelsLast";this.userCode=`
+ */class g6{constructor(t){this.variableNames=["x","dy"],this.outputShape=t.filterShape;const e=t.strideHeight,s=t.strideWidth,o=t.padInfo.top,r=t.padInfo.left,i=t.dataFormat==="channelsLast";this.userCode=`
       void main() {
         ivec4 coords = getOutputCoords();
         int wR = coords.x;
@@ -15362,7 +15362,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
         }
         setOutput(dotProd);
       }
-    `}}class xj{constructor(t){this.variableNames=["dy","W"],this.outputShape=t.inShape;const e=t.filterHeight,s=t.filterWidth,o=t.strideHeight,r=t.strideWidth,i=t.dataFormat==="channelsLast",a=e-1-t.padInfo.top,l=s-1-t.padInfo.left,c=i?1:2,u=i?2:3,h=i?3:1;this.userCode=`
+    `}}class x6{constructor(t){this.variableNames=["dy","W"],this.outputShape=t.inShape;const e=t.filterHeight,s=t.filterWidth,o=t.strideHeight,r=t.strideWidth,i=t.dataFormat==="channelsLast",a=e-1-t.padInfo.top,l=s-1-t.padInfo.left,c=i?1:2,u=i?2:3,h=i?3:1;this.userCode=`
       const ivec2 pads = ivec2(${a}, ${l});
 
       void main() {
@@ -15415,7 +15415,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
         }
         setOutput(dotProd);
       }
-    `}}class bj{constructor(t){this.variableNames=["x","dy"],this.outputShape=t.filterShape;const e=t.strideDepth,s=t.strideHeight,o=t.strideWidth,r=t.padInfo.front,i=t.padInfo.top,a=t.padInfo.left;this.userCode=`
+    `}}class b6{constructor(t){this.variableNames=["x","dy"],this.outputShape=t.filterShape;const e=t.strideDepth,s=t.strideHeight,o=t.strideWidth,r=t.padInfo.front,i=t.padInfo.top,a=t.padInfo.left;this.userCode=`
       void main() {
         ivec5 coords = getOutputCoords();
         int wF = coords.x;
@@ -15457,7 +15457,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
         }
         setOutput(dotProd);
       }
-    `}}class yj{constructor(t){this.variableNames=["dy","W"],this.outputShape=t.inShape;const e=t.filterDepth,s=t.filterHeight,o=t.filterWidth,r=t.strideDepth,i=t.strideHeight,a=t.strideWidth,l=e-1-t.padInfo.front,c=s-1-t.padInfo.top,u=o-1-t.padInfo.left;this.userCode=`
+    `}}class y6{constructor(t){this.variableNames=["dy","W"],this.outputShape=t.inShape;const e=t.filterDepth,s=t.filterHeight,o=t.filterWidth,r=t.strideDepth,i=t.strideHeight,a=t.strideWidth,l=e-1-t.padInfo.front,c=s-1-t.padInfo.top,u=o-1-t.padInfo.left;this.userCode=`
       const ivec3 pads = ivec3(${l}, ${c}, ${u});
 
       void main() {
@@ -15529,7 +15529,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function wj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,dy:r}=t,{strides:i,pad:a,dataFormat:l,dimRoundingMode:c,filterShape:u}=s,h=js(l),d=Be(o.shape,u,i,1,a,c,!1,h),f=new gj(d);return e.runWebGLProgram(f,[o,r],"float32")}const Cj={kernelName:vf,backendName:"webgl",kernelFunc:wj};/**
+ */function w6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,dy:r}=t,{strides:i,pad:a,dataFormat:l,dimRoundingMode:c,filterShape:u}=s,h=js(l),d=Be(o.shape,u,i,1,a,c,!1,h),f=new g6(d);return e.runWebGLProgram(f,[o,r],"float32")}const C6={kernelName:vf,backendName:"webgl",kernelFunc:w6};/**
  * @license
  * Copyright 2023 Google LLC.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15544,7 +15544,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class vj{constructor(t){this.variableNames=["dy","W"],this.packedInputs=!0,this.packedOutput=!0,this.customUniforms=[{name:"strides",type:"vec2"}],this.outputShape=t.inShape,this.enableShapeUniforms=Xe(this.outputShape.length);const e=t.filterHeight,s=t.filterWidth,o=e-1-t.padInfo.top,r=s-1-t.padInfo.left;this.userCode=`
+ */class v6{constructor(t){this.variableNames=["dy","W"],this.packedInputs=!0,this.packedOutput=!0,this.customUniforms=[{name:"strides",type:"vec2"}],this.outputShape=t.inShape,this.enableShapeUniforms=Xe(this.outputShape.length);const e=t.filterHeight,s=t.filterWidth,o=e-1-t.padInfo.top,r=s-1-t.padInfo.left;this.userCode=`
       const ivec2 pads = ivec2(${o}, ${r});
 
       void main() {
@@ -15633,7 +15633,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function $j(n){const{inputs:t,backend:e,attrs:s}=n,{dy:o,filter:r}=t,{inputShape:i,strides:a,pad:l,dataFormat:c,dimRoundingMode:u}=s,h=js(c),d=Be(i,r.shape,a,1,l,u,!1,h);if(H().getBool("WEBGL_PACK_CONV2DTRANSPOSE")&&h==="channelsLast"){const f=[[d.strideHeight,d.strideWidth]],p=new vj(d);return e.runWebGLProgram(p,[o,r],"float32",f)}else{const f=new xj(d);return e.runWebGLProgram(f,[o,r],"float32")}}const Ij={kernelName:Jc,backendName:"webgl",kernelFunc:$j};/**
+ */function $6(n){const{inputs:t,backend:e,attrs:s}=n,{dy:o,filter:r}=t,{inputShape:i,strides:a,pad:l,dataFormat:c,dimRoundingMode:u}=s,h=js(c),d=Be(i,r.shape,a,1,l,u,!1,h);if(H().getBool("WEBGL_PACK_CONV2DTRANSPOSE")&&h==="channelsLast"){const f=[[d.strideHeight,d.strideWidth]],p=new v6(d);return e.runWebGLProgram(p,[o,r],"float32",f)}else{const f=new x6(d);return e.runWebGLProgram(f,[o,r],"float32")}}const I6={kernelName:Jc,backendName:"webgl",kernelFunc:$6};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15648,7 +15648,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function kj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r}=t,{strides:i,pad:a,dilations:l}=s,c=Co(o.shape,r.shape,i,l,a),u=new dj(c);return e.runWebGLProgram(u,[o,r],"float32")}const Sj={kernelName:Qc,backendName:"webgl",kernelFunc:kj};/**
+ */function k6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r}=t,{strides:i,pad:a,dilations:l}=s,c=Co(o.shape,r.shape,i,l,a),u=new d6(c);return e.runWebGLProgram(u,[o,r],"float32")}const S6={kernelName:Qc,backendName:"webgl",kernelFunc:k6};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15663,7 +15663,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Nj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,dy:r}=t,{strides:i,pad:a,filterShape:l}=s,c=Co(o.shape,l,i,1,a),u=new bj(c);return e.runWebGLProgram(u,[o,r],"float32")}const Tj={kernelName:$f,backendName:"webgl",kernelFunc:Nj};/**
+ */function N6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,dy:r}=t,{strides:i,pad:a,filterShape:l}=s,c=Co(o.shape,l,i,1,a),u=new b6(c);return e.runWebGLProgram(u,[o,r],"float32")}const T6={kernelName:$f,backendName:"webgl",kernelFunc:N6};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15678,7 +15678,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Ej(n){const{inputs:t,backend:e,attrs:s}=n,{dy:o,filter:r}=t,{pad:i,strides:a,inputShape:l}=s,c=Co(l,r.shape,a,1,i),u=new yj(c);return e.runWebGLProgram(u,[o,r],"float32")}const Rj={kernelName:If,backendName:"webgl",kernelFunc:Ej};/**
+ */function E6(n){const{inputs:t,backend:e,attrs:s}=n,{dy:o,filter:r}=t,{pad:i,strides:a,inputShape:l}=s,c=Co(l,r.shape,a,1,i),u=new y6(c);return e.runWebGLProgram(u,[o,r],"float32")}const R6={kernelName:If,backendName:"webgl",kernelFunc:E6};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15693,14 +15693,14 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const Aj=li+`
+ */const A6=li+`
   return cos(x);
-`,Dj=`
+`,D6=`
   vec4 result = cos(x);
   bvec4 isNaN = isnan(x);
   ${gr}
   return result;
-`,_j=Gt({opSnippet:Aj,packedOpSnippet:Dj}),Fj={kernelName:ha,backendName:"webgl",kernelFunc:_j};/**
+`,_6=Gt({opSnippet:A6,packedOpSnippet:D6}),F6={kernelName:ha,backendName:"webgl",kernelFunc:_6};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15715,10 +15715,10 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const Oj=`
+ */const O6=`
   float e2x = exp(-x);
   return (e2x + 1.0 / e2x) / 2.0;
-`,Lj=Gt({opSnippet:Oj}),Mj={kernelName:da,backendName:"webgl",kernelFunc:Lj};/**
+`,L6=Gt({opSnippet:O6}),M6={kernelName:da,backendName:"webgl",kernelFunc:L6};/**
  * @license
  * Copyright 2017 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15733,7 +15733,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class Pj{constructor(t,e,s,o,r){this.variableNames=["Image","Boxes","BoxInd"],this.outputShape=[];const[i,a,l,c]=t,[u]=e,[h,d]=s;this.outputShape=[u,h,d,c];const f=o==="bilinear"?1:0,[p,m]=[`${a-1}.0`,`${l-1}.0`],[g,x,b]=h>1?[`${(a-1)/(h-1)}`,"(y2-y1) * height_ratio",`y1*${p} + float(y)*(height_scale)`]:["0.0","0.0",`0.5 * (y1+y2) * ${p}`],[w,y,C]=d>1?[`${(l-1)/(d-1)}`,"(x2-x1) * width_ratio",`x1*${m} + float(x)*(width_scale)`]:["0.0","0.0",`0.5 * (x1+x2) * ${m}`];this.userCode=`
+ */class P6{constructor(t,e,s,o,r){this.variableNames=["Image","Boxes","BoxInd"],this.outputShape=[];const[i,a,l,c]=t,[u]=e,[h,d]=s;this.outputShape=[u,h,d,c];const f=o==="bilinear"?1:0,[p,m]=[`${a-1}.0`,`${l-1}.0`],[g,x,b]=h>1?[`${(a-1)/(h-1)}`,"(y2-y1) * height_ratio",`y1*${p} + float(y)*(height_scale)`]:["0.0","0.0",`0.5 * (y1+y2) * ${p}`],[w,y,C]=d>1?[`${(l-1)/(d-1)}`,"(x2-x1) * width_ratio",`x1*${m} + float(x)*(width_scale)`]:["0.0","0.0",`0.5 * (x1+x2) * ${m}`];this.userCode=`
       const float height_ratio = float(${g});
       const float width_ratio = float(${w});
       void main() {
@@ -15809,7 +15809,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const zj=n=>{const{inputs:t,backend:e,attrs:s}=n,{image:o,boxes:r,boxInd:i}=t,{cropSize:a,method:l,extrapolationValue:c}=s,u=new Pj(o.shape,r.shape,a,l,c);return e.runWebGLProgram(u,[o,r,i],"float32")},Bj={kernelName:Sf,backendName:"webgl",kernelFunc:zj};var Zi;(function(n){n.Prod="*",n.Sum="+"})(Zi||(Zi={}));class Qx{constructor(t,e,s,o){this.op=t,this.outputShape=e,this.variableNames=["x"],this.customUniforms=[{name:"index",type:"float"}];const r=this.outputShape.length,i=this.op===Zi.Prod?"1.0":"0.0",a=s?i:`getX(${tb(r,"coords",this.op)})`,l=this.outputShape[this.outputShape.length-1];let c="",u="";s?(c=o?`end != ${l-1}`:"end != 0",u=o?"end + 1":"end - 1"):(c=o?`end + pow2 < ${l}`:"end >= pow2",u=o?"end + pow2":"end - pow2"),this.userCode=`
+ */const z6=n=>{const{inputs:t,backend:e,attrs:s}=n,{image:o,boxes:r,boxInd:i}=t,{cropSize:a,method:l,extrapolationValue:c}=s,u=new P6(o.shape,r.shape,a,l,c);return e.runWebGLProgram(u,[o,r,i],"float32")},B6={kernelName:Sf,backendName:"webgl",kernelFunc:z6};var Zi;(function(n){n.Prod="*",n.Sum="+"})(Zi||(Zi={}));class Qx{constructor(t,e,s,o){this.op=t,this.outputShape=e,this.variableNames=["x"],this.customUniforms=[{name:"index",type:"float"}];const r=this.outputShape.length,i=this.op===Zi.Prod?"1.0":"0.0",a=s?i:`getX(${tb(r,"coords",this.op)})`,l=this.outputShape[this.outputShape.length-1];let c="",u="";s?(c=o?`end != ${l-1}`:"end != 0",u=o?"end + 1":"end - 1"):(c=o?`end + pow2 < ${l}`:"end >= pow2",u=o?"end + pow2":"end - pow2"),this.userCode=`
       void main() {
         ${te(r)} coords = getOutputCoords();
         int end = ${eb(r,"coords",this.op)};
@@ -15852,7 +15852,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Vj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o}=t,{axis:r,exclusive:i,reverse:a}=s;return P$(Zi.Prod,o,e,r,i,a)}const Wj={kernelName:kf,backendName:"webgl",kernelFunc:Vj};/**
+ */function V6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o}=t,{axis:r,exclusive:i,reverse:a}=s;return P$(Zi.Prod,o,e,r,i,a)}const W6={kernelName:kf,backendName:"webgl",kernelFunc:V6};/**
  * @license
  * Copyright 2022 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15867,7 +15867,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Uj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o}=t,{axis:r,exclusive:i,reverse:a}=s;return P$(Zi.Sum,o,e,r,i,a)}const Gj={kernelName:tu,backendName:"webgl",kernelFunc:Uj};/**
+ */function U6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o}=t,{axis:r,exclusive:i,reverse:a}=s;return P$(Zi.Sum,o,e,r,i,a)}const G6={kernelName:tu,backendName:"webgl",kernelFunc:U6};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15882,7 +15882,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Hj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,weights:r}=t,{size:i,binaryOutput:a}=s;if(o.shape.length===1){const l=e.readSync(o.dataId),c=e.readSync(r.dataId),u=b$(l,c,r.dtype,r.shape,i);return e.makeTensorInfo([i],r.dtype,u)}else if(o.shape.length===2){const l=e.bufferSync(o),c=e.bufferSync(r),u=X4(l,c,i,a);return e.makeTensorInfo(u.shape,r.dtype,u.values)}throw new Error(`Error in denseBincount: input must be at most rank 2, but got rank${o.shape.length}.`)}const jj={kernelName:Nf,backendName:"webgl",kernelFunc:Hj};/**
+ */function H6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,weights:r}=t,{size:i,binaryOutput:a}=s;if(o.shape.length===1){const l=e.readSync(o.dataId),c=e.readSync(r.dataId),u=b$(l,c,r.dtype,r.shape,i);return e.makeTensorInfo([i],r.dtype,u)}else if(o.shape.length===2){const l=e.bufferSync(o),c=e.bufferSync(r),u=X4(l,c,i,a);return e.makeTensorInfo(u.shape,r.dtype,u.values)}throw new Error(`Error in denseBincount: input must be at most rank 2, but got rank${o.shape.length}.`)}const j6={kernelName:Nf,backendName:"webgl",kernelFunc:H6};/**
  * @license
  * Copyright 2018 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15897,7 +15897,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class qj{constructor(t,e,s){this.variableNames=["x"],this.outputShape=[],this.outputShape=t,this.blockSize=e,this.dataFormat=s,this.userCode=`
+ */class q6{constructor(t,e,s){this.variableNames=["x"],this.outputShape=[],this.outputShape=t,this.blockSize=e,this.dataFormat=s,this.userCode=`
     void main() {
       ivec4 coords = getOutputCoords();
       int b = coords[0];
@@ -15931,7 +15931,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Kj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o}=t,{blockSize:r,dataFormat:i}=s,a=o.shape[0],l=i==="NHWC"?o.shape[1]:o.shape[2],c=i==="NHWC"?o.shape[2]:o.shape[3],u=i==="NHWC"?o.shape[3]:o.shape[1],h=l*r,d=c*r,f=u/(r*r),p=i==="NHWC"?[a,h,d,f]:[a,f,h,d],m=new qj(p,r,i);return e.runWebGLProgram(m,[o],o.dtype)}const Xj={kernelName:Tf,backendName:"webgl",kernelFunc:Kj};/**
+ */function K6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o}=t,{blockSize:r,dataFormat:i}=s,a=o.shape[0],l=i==="NHWC"?o.shape[1]:o.shape[2],c=i==="NHWC"?o.shape[2]:o.shape[3],u=i==="NHWC"?o.shape[3]:o.shape[1],h=l*r,d=c*r,f=u/(r*r),p=i==="NHWC"?[a,h,d,f]:[a,f,h,d],m=new q6(p,r,i);return e.runWebGLProgram(m,[o],o.dtype)}const X6={kernelName:Tf,backendName:"webgl",kernelFunc:K6};/**
  * @license
  * Copyright 2017 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16218,7 +16218,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Yj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r}=t,{strides:i,pad:a,dilations:l,dimRoundingMode:c}=s;let u=l;u==null&&(u=[1,1]),N(qe(i,u),()=>`Error in depthwiseConv2d: Either strides or dilations must be 1. Got strides ${i} and dilations '${u}'`);const h=Be(o.shape,r.shape,i,u,a,c,!0);let d;H().getBool("WEBGL_PACK_DEPTHWISECONV")&&h.strideWidth<=2&&h.outChannels/h.inChannels===1?d=new B$(h):d=new z$(h);const f=[[h.padInfo.top,h.padInfo.left],[h.strideHeight,h.strideWidth],[h.dilationHeight,h.dilationWidth],[h.inHeight,h.inWidth]];return e.runWebGLProgram(d,[o,r],"float32",f)}const Zj={kernelName:eu,backendName:"webgl",kernelFunc:Yj};/**
+ */function Y6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r}=t,{strides:i,pad:a,dilations:l,dimRoundingMode:c}=s;let u=l;u==null&&(u=[1,1]),N(qe(i,u),()=>`Error in depthwiseConv2d: Either strides or dilations must be 1. Got strides ${i} and dilations '${u}'`);const h=Be(o.shape,r.shape,i,u,a,c,!0);let d;H().getBool("WEBGL_PACK_DEPTHWISECONV")&&h.strideWidth<=2&&h.outChannels/h.inChannels===1?d=new B$(h):d=new z$(h);const f=[[h.padInfo.top,h.padInfo.left],[h.strideHeight,h.strideWidth],[h.dilationHeight,h.dilationWidth],[h.inHeight,h.inWidth]];return e.runWebGLProgram(d,[o,r],"float32",f)}const Z6={kernelName:eu,backendName:"webgl",kernelFunc:Y6};/**
  * @license
  * Copyright 2018 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16233,7 +16233,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class Jj{constructor(t){this.variableNames=["x","dy"],this.outputShape=t.filterShape;const e=t.strideHeight,s=t.strideWidth,o=t.padInfo.top,r=t.padInfo.left,i=t.outChannels/t.inChannels;this.userCode=`
+ */class J6{constructor(t){this.variableNames=["x","dy"],this.outputShape=t.filterShape;const e=t.strideHeight,s=t.strideWidth,o=t.padInfo.top,r=t.padInfo.left,i=t.outChannels/t.inChannels;this.userCode=`
       void main() {
         ivec4 coords = getOutputCoords();
         int wR = coords.x;
@@ -16268,7 +16268,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
         }
         setOutput(dotProd);
       }
-    `}}class Qj{constructor(t){this.variableNames=["dy","W"],this.outputShape=t.inShape;const e=t.filterHeight,s=t.filterWidth,o=t.strideHeight,r=t.strideWidth,i=e-1-t.padInfo.top,a=s-1-t.padInfo.left,l=t.outChannels/t.inChannels;this.userCode=`
+    `}}class Q6{constructor(t){this.variableNames=["dy","W"],this.outputShape=t.inShape;const e=t.filterHeight,s=t.filterWidth,o=t.strideHeight,r=t.strideWidth,i=e-1-t.padInfo.top,a=s-1-t.padInfo.left,l=t.outChannels/t.inChannels;this.userCode=`
       const ivec2 pads = ivec2(${i}, ${a});
 
       void main() {
@@ -16328,7 +16328,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function t6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,dy:r}=t,{strides:i,dilations:a,pad:l,dimRoundingMode:c,filterShape:u}=s,h=Be(o.shape,u,i,a,l,c,!0),d=new Jj(h);return e.runWebGLProgram(d,[o,r],"float32")}const e6={kernelName:Ef,backendName:"webgl",kernelFunc:t6};/**
+ */function tj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,dy:r}=t,{strides:i,dilations:a,pad:l,dimRoundingMode:c,filterShape:u}=s,h=Be(o.shape,u,i,a,l,c,!0),d=new J6(h);return e.runWebGLProgram(d,[o,r],"float32")}const ej={kernelName:Ef,backendName:"webgl",kernelFunc:tj};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16343,7 +16343,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function n6(n){const{inputs:t,backend:e,attrs:s}=n,{dy:o,filter:r}=t,{strides:i,dilations:a,pad:l,dimRoundingMode:c,inputShape:u}=s,h=Be(u,r.shape,i,a,l,c,!0),d=new Qj(h);return e.runWebGLProgram(d,[o,r],"float32")}const s6={kernelName:Rf,backendName:"webgl",kernelFunc:n6};/**
+ */function nj(n){const{inputs:t,backend:e,attrs:s}=n,{dy:o,filter:r}=t,{strides:i,dilations:a,pad:l,dimRoundingMode:c,inputShape:u}=s,h=Be(u,r.shape,i,a,l,c,!0),d=new Q6(h);return e.runWebGLProgram(d,[o,r],"float32")}const sj={kernelName:Rf,backendName:"webgl",kernelFunc:nj};/**
  * @license
  * Copyright 2019 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16358,7 +16358,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class o6{constructor(t){this.variableNames=["X"],this.outputShape=[t,t],this.userCode=`
+ */class oj{constructor(t){this.variableNames=["X"],this.outputShape=[t,t],this.userCode=`
       void main() {
           ivec2 coords = getOutputCoords();
           float val = coords[0] == coords[1] ? getX(coords[0]) : 0.0;
@@ -16379,7 +16379,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function r6(n){const{inputs:t,backend:e}=n,{x:s}=t,o=[...s.shape,...s.shape],r=X(s.shape),i=ht({inputs:{x:s},backend:e,attrs:{shape:[r]}}),a=new o6(r),l=e.runWebGLProgram(a,[i],i.dtype),c=ht({inputs:{x:l},backend:e,attrs:{shape:o}});return e.disposeIntermediateTensorInfo(i),e.disposeIntermediateTensorInfo(l),c}const i6={kernelName:k0,backendName:"webgl",kernelFunc:r6};/**
+ */function rj(n){const{inputs:t,backend:e}=n,{x:s}=t,o=[...s.shape,...s.shape],r=X(s.shape),i=ht({inputs:{x:s},backend:e,attrs:{shape:[r]}}),a=new oj(r),l=e.runWebGLProgram(a,[i],i.dtype),c=ht({inputs:{x:l},backend:e,attrs:{shape:o}});return e.disposeIntermediateTensorInfo(i),e.disposeIntermediateTensorInfo(l),c}const ij={kernelName:k0,backendName:"webgl",kernelFunc:rj};/**
  * @license
  * Copyright 2017 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16394,7 +16394,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class a6{constructor(t){this.variableNames=["x","W"],this.outputShape=t.outShape;const{inHeight:e,inWidth:s,padInfo:o,strideHeight:r,strideWidth:i,filterHeight:a,filterWidth:l,dilationHeight:c,dilationWidth:u}=t,{top:h,left:d}=o;this.userCode=`
+ */class aj{constructor(t){this.variableNames=["x","W"],this.outputShape=t.outShape;const{inHeight:e,inWidth:s,padInfo:o,strideHeight:r,strideWidth:i,filterHeight:a,filterWidth:l,dilationHeight:c,dilationWidth:u}=t,{top:h,left:d}=o;this.userCode=`
       const ivec2 strides = ivec2(${r}, ${i});
       const ivec2 pads = ivec2(${h}, ${d});
       const float neg_infinity = -3.4e38;
@@ -16447,7 +16447,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function l6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r}=t,{strides:i,pad:a,dilations:l}=s,c=Ja(o.shape,r.shape,i,a,"NHWC",l);let u;const h=new a6(c);u=e.runWebGLProgram(h,[o,r],"float32");const d=ht({inputs:{x:u},backend:e,attrs:{shape:c.outShape}});return e.disposeIntermediateTensorInfo(u),d}const c6={kernelName:nu,backendName:"webgl",kernelFunc:l6};/**
+ */function lj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r}=t,{strides:i,pad:a,dilations:l}=s,c=Ja(o.shape,r.shape,i,a,"NHWC",l);let u;const h=new aj(c);u=e.runWebGLProgram(h,[o,r],"float32");const d=ht({inputs:{x:u},backend:e,attrs:{shape:c.outShape}});return e.disposeIntermediateTensorInfo(u),d}const cj={kernelName:nu,backendName:"webgl",kernelFunc:lj};/**
  * @license
  * Copyright 2021 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16462,7 +16462,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function u6(n){const{inputs:t,backend:e,attrs:s}=n,{equation:o}=s,r=t,{allDims:i,summedDims:a,idDims:l}=Qp(o,r.length);em(i.length,l,r);const{path:c,steps:u}=nm(a,l),h=u.length;let d=null,f=i.length;const p=[];for(let m=0;m<h;++m){for(const g of u[m]){const{permutationIndices:x,expandDims:b}=tm(f,l[g]);let w;sm(x)?w=r[g]:(w=sn({inputs:{x:r[g]},backend:e,attrs:{perm:x}}),p.push(w));const y=w.shape.slice();for(let C=0;C<b.length;++C)y.splice(b[C],0,1);Kt(w.shape,y)||(w=ht({inputs:{x:w},backend:e,attrs:{shape:y}}),p.push(w)),d===null?d=w:(d=Um({inputs:{a:w,b:d},backend:e}),p.push(d))}m<h-1&&(c[m]>=0&&(d=ph({inputs:{x:d},backend:e,attrs:{axis:c[m]-(i.length-f),keepDims:!1}}),p.push(d)),f--)}for(const m of p)m!==d&&e.disposeIntermediateTensorInfo(m);return d}const h6={kernelName:Af,backendName:"webgl",kernelFunc:u6};/**
+ */function uj(n){const{inputs:t,backend:e,attrs:s}=n,{equation:o}=s,r=t,{allDims:i,summedDims:a,idDims:l}=Qp(o,r.length);em(i.length,l,r);const{path:c,steps:u}=nm(a,l),h=u.length;let d=null,f=i.length;const p=[];for(let m=0;m<h;++m){for(const g of u[m]){const{permutationIndices:x,expandDims:b}=tm(f,l[g]);let w;sm(x)?w=r[g]:(w=sn({inputs:{x:r[g]},backend:e,attrs:{perm:x}}),p.push(w));const y=w.shape.slice();for(let C=0;C<b.length;++C)y.splice(b[C],0,1);Kt(w.shape,y)||(w=ht({inputs:{x:w},backend:e,attrs:{shape:y}}),p.push(w)),d===null?d=w:(d=Um({inputs:{a:w,b:d},backend:e}),p.push(d))}m<h-1&&(c[m]>=0&&(d=ph({inputs:{x:d},backend:e,attrs:{axis:c[m]-(i.length-f),keepDims:!1}}),p.push(d)),f--)}for(const m of p)m!==d&&e.disposeIntermediateTensorInfo(m);return d}const hj={kernelName:Af,backendName:"webgl",kernelFunc:uj};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16477,7 +16477,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const d6="return (x >= 0.0) ? x : (exp(x) - 1.0);",f6=`
+ */const dj="return (x >= 0.0) ? x : (exp(x) - 1.0);",fj=`
   vec4 result;
 
   result.r = (x.r >= 0.0) ? x.r : (exp(x.r) - 1.0);
@@ -16486,7 +16486,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
   result.a = (x.a >= 0.0) ? x.a : (exp(x.a) - 1.0);
 
   return result;
-`,p6=Gt({opSnippet:d6,packedOpSnippet:f6}),m6={kernelName:pa,backendName:"webgl",kernelFunc:p6};/**
+`,pj=Gt({opSnippet:dj,packedOpSnippet:fj}),mj={kernelName:pa,backendName:"webgl",kernelFunc:pj};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16501,10 +16501,10 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const g6="return (b >= 0.0) ? a : a * (b + 1.0);",x6=`
+ */const gj="return (b >= 0.0) ? a : a * (b + 1.0);",xj=`
   vec4 bGTEZero = vec4(greaterThanEqual(b, vec4(0.)));
   return (bGTEZero * a) + ((vec4(1.0) - bGTEZero) * (a * (b + vec4(1.0))));
-`,b6=n=>{const{inputs:t,backend:e}=n,{dy:s,y:o}=t,r=H().getBool("WEBGL_PACK_BINARY_OPERATIONS")?new ai(x6,s.shape,o.shape):new ir(g6,s.shape,o.shape);return e.runWebGLProgram(r,[s,o],s.dtype)},y6={kernelName:Df,backendName:"webgl",kernelFunc:b6};/**
+`,bj=n=>{const{inputs:t,backend:e}=n,{dy:s,y:o}=t,r=H().getBool("WEBGL_PACK_BINARY_OPERATIONS")?new ai(xj,s.shape,o.shape):new ir(gj,s.shape,o.shape);return e.runWebGLProgram(r,[s,o],s.dtype)},yj={kernelName:Df,backendName:"webgl",kernelFunc:bj};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16519,9 +16519,9 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const w6=`
+ */const wj=`
   return vec4(equal(a, b));
-`,C6="return float(a == b);",v6=We({opSnippet:C6,packedOpSnippet:w6,dtype:"bool",cpuKernelImpl:tU}),$6={kernelName:su,backendName:"webgl",kernelFunc:v6};/**
+`,Cj="return float(a == b);",vj=We({opSnippet:Cj,packedOpSnippet:wj,dtype:"bool",cpuKernelImpl:tU}),$j={kernelName:su,backendName:"webgl",kernelFunc:vj};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16536,7 +16536,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const I6=`
+ */const Ij=`
   // Error function is calculated approximately with elementary function.
   // See "Handbook of Mathematical Functions with Formulas,
   // Graphs, and Mathematical Tables", Abramowitz and Stegun.
@@ -16551,7 +16551,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
   x = abs(x);
   float t = 1.0 / (1.0 + p * x);
   return sign * (1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*exp(-x*x));
-`,k6=Gt({opSnippet:I6}),S6={kernelName:ma,backendName:"webgl",kernelFunc:k6};/**
+`,kj=Gt({opSnippet:Ij}),Sj={kernelName:ma,backendName:"webgl",kernelFunc:kj};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16566,9 +16566,9 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const N6=li+`
+ */const Nj=li+`
   return exp(x);
-`,T6=`
+`,Tj=`
   vec4 result = exp(x);
   bvec4 isNaN = isnan(x);
   result.r = isNaN.r ? x.r : result.r;
@@ -16577,7 +16577,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
   result.a = isNaN.a ? x.a : result.a;
 
   return result;
-`,V$=Gt({opSnippet:N6,packedOpSnippet:T6,cpuKernelImpl:eU,dtype:"float32"}),E6={kernelName:ga,backendName:"webgl",kernelFunc:V$};/**
+`,V$=Gt({opSnippet:Nj,packedOpSnippet:Tj,cpuKernelImpl:eU,dtype:"float32"}),Ej={kernelName:ga,backendName:"webgl",kernelFunc:V$};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the License);
@@ -16592,7 +16592,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Wd(n){const{inputs:t,attrs:e,backend:s}=n,{dim:o}=e,{input:r}=t,i=r.shape.length,a=r.shape.slice();let l=o;return o<0&&(N(-(i+1)<=o,()=>`Axis must be in the interval [${-(i+1)}, ${i}]`),l=i+o+1),a.splice(l,0,1),ht({inputs:{x:r},backend:s,attrs:{shape:a}})}const R6={kernelName:ou,backendName:"webgl",kernelFunc:Wd};/**
+ */function Wd(n){const{inputs:t,attrs:e,backend:s}=n,{dim:o}=e,{input:r}=t,i=r.shape.length,a=r.shape.slice();let l=o;return o<0&&(N(-(i+1)<=o,()=>`Axis must be in the interval [${-(i+1)}, ${i}]`),l=i+o+1),a.splice(l,0,1),ht({inputs:{x:r},backend:s,attrs:{shape:a}})}const Rj={kernelName:ou,backendName:"webgl",kernelFunc:Wd};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16607,7 +16607,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const nb="return exp(x) - 1.0;",A6=Gt({opSnippet:nb,packedOpSnippet:nb,cpuKernelImpl:nU}),D6={kernelName:xa,backendName:"webgl",kernelFunc:A6};/**
+ */const nb="return exp(x) - 1.0;",Aj=Gt({opSnippet:nb,packedOpSnippet:nb,cpuKernelImpl:nU}),Dj={kernelName:xa,backendName:"webgl",kernelFunc:Aj};/**
  * @license
  * Copyright 2018 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16685,7 +16685,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function _6(n){const{inputs:t,backend:e}=n,{input:s}=t;return W$(s,!1,e)}const F6={kernelName:_f,backendName:"webgl",kernelFunc:_6};/**
+ */function _j(n){const{inputs:t,backend:e}=n,{input:s}=t;return W$(s,!1,e)}const Fj={kernelName:_f,backendName:"webgl",kernelFunc:_j};/**
  * @license
  * Copyright 2019 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16700,7 +16700,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class O6{constructor(t,e){this.outputShape=[],this.customUniforms=[{name:"value",type:"float"}],this.variableNames=["x"],this.outputShape=t,this.userCode=`
+ */class Oj{constructor(t,e){this.outputShape=[],this.customUniforms=[{name:"value",type:"float"}],this.variableNames=["x"],this.outputShape=t,this.userCode=`
       void main() {
         // Input can be obtained from uniform value.
         setOutput(value);
@@ -16720,7 +16720,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function yl(n){const{backend:t,attrs:e}=n,{shape:s,value:o}=e;let{dtype:r}=e;if(r=r||Kr(o),r==="string"){const i=fe(r,X(s));return i.fill(o),t.makeTensorInfo(s,r,i)}else{const i=new O6(s,o),a=[[o]];return t.runWebGLProgram(i,[],r,a)}}const L6={kernelName:Ff,backendName:"webgl",kernelFunc:yl};/**
+ */function yl(n){const{backend:t,attrs:e}=n,{shape:s,value:o}=e;let{dtype:r}=e;if(r=r||Kr(o),r==="string"){const i=fe(r,X(s));return i.fill(o),t.makeTensorInfo(s,r,i)}else{const i=new Oj(s,o),a=[[o]];return t.runWebGLProgram(i,[],r,a)}}const Lj={kernelName:Ff,backendName:"webgl",kernelFunc:yl};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16735,7 +16735,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class M6{constructor(t){this.variableNames=["Image"],this.outputShape=[];const e=t[2];this.outputShape=t,this.userCode=`
+ */class Mj{constructor(t){this.variableNames=["Image"],this.outputShape=[];const e=t[2];this.outputShape=t,this.userCode=`
         void main() {
           ivec4 coords = getOutputCoords();
           int x = coords[2];
@@ -16764,7 +16764,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const P6={kernelName:Of,backendName:"webgl",kernelFunc:({inputs:n,backend:t})=>{const{image:e}=n,s=t,o=new M6(e.shape);return s.runWebGLProgram(o,[e],e.dtype)}};/**
+ */const Pj={kernelName:Of,backendName:"webgl",kernelFunc:({inputs:n,backend:t})=>{const{image:e}=n,s=t,o=new Mj(e.shape);return s.runWebGLProgram(o,[e],e.dtype)}};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16779,7 +16779,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const ob="return floor(x);",z6=Gt({opSnippet:ob,packedOpSnippet:ob,cpuKernelImpl:sU}),B6={kernelName:ba,backendName:"webgl",kernelFunc:z6};/**
+ */const ob="return floor(x);",zj=Gt({opSnippet:ob,packedOpSnippet:ob,cpuKernelImpl:sU}),Bj={kernelName:ba,backendName:"webgl",kernelFunc:zj};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16794,7 +16794,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const V6=`
+ */const Vj=`
   float s = sign(a) * sign(b);
   int ia = round(a);
   int ib = round(b);
@@ -16804,7 +16804,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
   } else {
     return NAN;
   }
-`,W6=`
+`,Wj=`
   ivec4 ia = round(a);
   ivec4 ib = round(b);
   bvec4 cond = notEqual(ib, ivec4(0));
@@ -16825,7 +16825,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
     result[3] = idiv(ia[3], ib[3], s[3]);
   }
   return vec4(result);
-`,U6=We({opSnippet:V6,packedOpSnippet:W6,dtype:"int32"}),G6={kernelName:ya,backendName:"webgl",kernelFunc:U6};/**
+`,Uj=We({opSnippet:Vj,packedOpSnippet:Wj,dtype:"int32"}),Gj={kernelName:ya,backendName:"webgl",kernelFunc:Uj};/**
  * @license
  * Copyright 2018 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16840,7 +16840,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class H6{constructor(t){this.variableNames=["A"];const e=on(),[s,o]=t;this.outputShape=t,this.userCode=`
+ */class Hj{constructor(t){this.variableNames=["A"];const e=on(),[s,o]=t;this.outputShape=t,this.userCode=`
       void main() {
         ivec3 coords = getOutputCoords();
         int texR = coords[0];
@@ -16877,7 +16877,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */class j6{constructor(t){this.variableNames=["A"],this.packedInputs=!1,this.packedOutput=!0;const e=on(),[s,o]=t;this.outputShape=t,this.userCode=`
+ */class jj{constructor(t){this.variableNames=["A"],this.packedInputs=!1,this.packedOutput=!0;const e=on(),[s,o]=t;this.outputShape=t,this.userCode=`
       void main() {
         ivec3 coords = getOutputCoords();
         int texR = coords[0];
@@ -16926,7 +16926,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const q6={kernelName:VS,backendName:"webgl",kernelFunc:K6};let Cr,jh=H().getBool("CANVAS2D_WILL_READ_FREQUENTLY_FOR_GPU");function K6(n){const{inputs:t,backend:e,attrs:s}=n;let{pixels:o}=t;const{numChannels:r}=s,i=typeof HTMLVideoElement<"u"&&o instanceof HTMLVideoElement,a=typeof HTMLImageElement<"u"&&o instanceof HTMLImageElement,[l,c]=i?[o.videoWidth,o.videoHeight]:[o.width,o.height],u=[c,l],h=[c,l,r];if(a||i){const m=H().getBool("CANVAS2D_WILL_READ_FREQUENTLY_FOR_GPU");(Cr==null||m!==jh)&&(jh=m,Cr=document.createElement("canvas").getContext("2d",{willReadFrequently:jh})),Cr.canvas.width=l,Cr.canvas.height=c,Cr.drawImage(o,0,0,l,c),o=Cr.canvas}const d=e.makeTensorInfo(u,"int32");e.texData.get(d.dataId).usage=En.PIXELS,e.gpgpu.uploadPixelDataToTexture(e.getTexture(d.dataId),o);const f=H().getBool("WEBGL_PACK")?new j6(h):new H6(h),p=e.runWebGLProgram(f,[d],"int32");return e.disposeData(d.dataId),p}/**
+ */const qj={kernelName:VS,backendName:"webgl",kernelFunc:Kj};let Cr,jh=H().getBool("CANVAS2D_WILL_READ_FREQUENTLY_FOR_GPU");function Kj(n){const{inputs:t,backend:e,attrs:s}=n;let{pixels:o}=t;const{numChannels:r}=s,i=typeof HTMLVideoElement<"u"&&o instanceof HTMLVideoElement,a=typeof HTMLImageElement<"u"&&o instanceof HTMLImageElement,[l,c]=i?[o.videoWidth,o.videoHeight]:[o.width,o.height],u=[c,l],h=[c,l,r];if(a||i){const m=H().getBool("CANVAS2D_WILL_READ_FREQUENTLY_FOR_GPU");(Cr==null||m!==jh)&&(jh=m,Cr=document.createElement("canvas").getContext("2d",{willReadFrequently:jh})),Cr.canvas.width=l,Cr.canvas.height=c,Cr.drawImage(o,0,0,l,c),o=Cr.canvas}const d=e.makeTensorInfo(u,"int32");e.texData.get(d.dataId).usage=En.PIXELS,e.gpgpu.uploadPixelDataToTexture(e.getTexture(d.dataId),o);const f=H().getBool("WEBGL_PACK")?new jj(h):new Hj(h),p=e.runWebGLProgram(f,[d],"int32");return e.disposeData(d.dataId),p}/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16941,7 +16941,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function X6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r,bias:i,preluActivationWeights:a}=t,{strides:l,pad:c,dataFormat:u,dilations:h,dimRoundingMode:d,activation:f,leakyreluAlpha:p}=s,m=js(u),g=Be(o.shape,r.shape,l,h,c,d,!1,m);let x;const b=[],w=i!=null,y=a!=null,C=f==="leakyrelu",$=()=>{const T=[o,r],k=(I,v)=>{if(v==="NCHW"&&I.shape.length===1&&I.shape[0]!==1){const A=ht({inputs:{x:I},backend:e,attrs:{shape:[I.shape[0],1,1]}});return b.push(A),A}return I};if(w&&T.push(k(i,u)),y&&T.push(k(a,u)),C){const I=e.makeTensorInfo([],"float32",yo(p,"float32"));T.push(I),b.push(I)}return T};if(g.filterHeight===1&&g.filterWidth===1&&g.dilationHeight===1&&g.dilationWidth===1&&g.strideHeight===1&&g.strideWidth===1&&(g.padInfo.type==="SAME"||g.padInfo.type==="VALID"))x=L$({x:o,filter:r,convInfo:g,backend:e,bias:i,activation:f,preluActivationWeights:a,leakyreluAlpha:p});else if(g.strideWidth<=2&&m==="channelsLast"&&H().getBool("WEBGL_EXP_CONV")){const T=f?Xi(f,!0):null,k=new O$(g,w,T,y,C),I=[[g.padInfo.top,g.padInfo.left],[g.strideHeight,g.strideWidth],[g.dilationHeight,g.dilationWidth],[g.inHeight,g.inWidth]],v=$();x=e.runWebGLProgram(k,v,"float32",I)}else if(H().getBool("WEBGL_CONV_IM2COL"))x=M$({x:o,filter:r,convInfo:g,backend:e,bias:i,activation:f,preluActivationWeights:a,leakyreluAlpha:p});else{const T=f?Xi(f,!1):null,k=new F$(g,w,T,y,C),I=$();x=e.runWebGLProgram(k,I,"float32")}const S=ht({inputs:{x},backend:e,attrs:{shape:g.outShape}});return b.push(x),b.forEach(T=>e.disposeIntermediateTensorInfo(T)),S}const Y6={kernelName:oc,backendName:"webgl",kernelFunc:X6};/**
+ */function Xj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r,bias:i,preluActivationWeights:a}=t,{strides:l,pad:c,dataFormat:u,dilations:h,dimRoundingMode:d,activation:f,leakyreluAlpha:p}=s,m=js(u),g=Be(o.shape,r.shape,l,h,c,d,!1,m);let x;const b=[],w=i!=null,y=a!=null,C=f==="leakyrelu",$=()=>{const T=[o,r],k=(I,v)=>{if(v==="NCHW"&&I.shape.length===1&&I.shape[0]!==1){const A=ht({inputs:{x:I},backend:e,attrs:{shape:[I.shape[0],1,1]}});return b.push(A),A}return I};if(w&&T.push(k(i,u)),y&&T.push(k(a,u)),C){const I=e.makeTensorInfo([],"float32",yo(p,"float32"));T.push(I),b.push(I)}return T};if(g.filterHeight===1&&g.filterWidth===1&&g.dilationHeight===1&&g.dilationWidth===1&&g.strideHeight===1&&g.strideWidth===1&&(g.padInfo.type==="SAME"||g.padInfo.type==="VALID"))x=L$({x:o,filter:r,convInfo:g,backend:e,bias:i,activation:f,preluActivationWeights:a,leakyreluAlpha:p});else if(g.strideWidth<=2&&m==="channelsLast"&&H().getBool("WEBGL_EXP_CONV")){const T=f?Xi(f,!0):null,k=new O$(g,w,T,y,C),I=[[g.padInfo.top,g.padInfo.left],[g.strideHeight,g.strideWidth],[g.dilationHeight,g.dilationWidth],[g.inHeight,g.inWidth]],v=$();x=e.runWebGLProgram(k,v,"float32",I)}else if(H().getBool("WEBGL_CONV_IM2COL"))x=M$({x:o,filter:r,convInfo:g,backend:e,bias:i,activation:f,preluActivationWeights:a,leakyreluAlpha:p});else{const T=f?Xi(f,!1):null,k=new F$(g,w,T,y,C),I=$();x=e.runWebGLProgram(k,I,"float32")}const S=ht({inputs:{x},backend:e,attrs:{shape:g.outShape}});return b.push(x),b.forEach(T=>e.disposeIntermediateTensorInfo(T)),S}const Yj={kernelName:oc,backendName:"webgl",kernelFunc:Xj};/**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16956,7 +16956,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function Z6(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r,bias:i,preluActivationWeights:a}=t,{strides:l,pad:c,dilations:u,dimRoundingMode:h,activation:d,leakyreluAlpha:f}=s,p=[];let m=u;m==null&&(m=[1,1]),N(qe(l,m),()=>`Error in depthwiseConv2d: Either strides or dilations must be 1. Got strides ${l} and dilations '${m}'`);const g=Be(o.shape,r.shape,l,m,c,h,!0),x=H().getBool("WEBGL_PACK_DEPTHWISECONV")&&g.strideWidth<=2&&g.outChannels/g.inChannels===1,b=d?Xi(d,x):null,w=[o,r],y=i!=null,C=a!=null,$=d==="leakyrelu";if(y&&w.push(i),C&&w.push(a),$){const I=e.makeTensorInfo([],"float32",yo(f,"float32"));w.push(I),p.push(I)}let S;x?S=new B$(g,y,b,C,$):S=new z$(g,y,b,C,$);const T=[[g.padInfo.top,g.padInfo.left],[g.strideHeight,g.strideWidth],[g.dilationHeight,g.dilationWidth],[g.inHeight,g.inWidth]],k=e.runWebGLProgram(S,w,"float32",T);return p.forEach(I=>e.disposeIntermediateTensorInfo(I)),k}const J6={kernelName:G0,backendName:"webgl",kernelFunc:Z6};class Q6{constructor(t,e,s,o){this.sliceDim=t,this.strides=e,this.paramsShape=o,this.variableNames=["x","indices"],this.outputShape=s;const r=te(s.length);let i=`
+ */function Zj(n){const{inputs:t,backend:e,attrs:s}=n,{x:o,filter:r,bias:i,preluActivationWeights:a}=t,{strides:l,pad:c,dilations:u,dimRoundingMode:h,activation:d,leakyreluAlpha:f}=s,p=[];let m=u;m==null&&(m=[1,1]),N(qe(l,m),()=>`Error in depthwiseConv2d: Either strides or dilations must be 1. Got strides ${l} and dilations '${m}'`);const g=Be(o.shape,r.shape,l,m,c,h,!0),x=H().getBool("WEBGL_PACK_DEPTHWISECONV")&&g.strideWidth<=2&&g.outChannels/g.inChannels===1,b=d?Xi(d,x):null,w=[o,r],y=i!=null,C=a!=null,$=d==="leakyrelu";if(y&&w.push(i),C&&w.push(a),$){const I=e.makeTensorInfo([],"float32",yo(f,"float32"));w.push(I),p.push(I)}let S;x?S=new B$(g,y,b,C,$):S=new z$(g,y,b,C,$);const T=[[g.padInfo.top,g.padInfo.left],[g.strideHeight,g.strideWidth],[g.dilationHeight,g.dilationWidth],[g.inHeight,g.inWidth]],k=e.runWebGLProgram(S,w,"float32",T);return p.forEach(I=>e.disposeIntermediateTensorInfo(I)),k}const Jj={kernelName:G0,backendName:"webgl",kernelFunc:Zj};class Qj{constructor(t,e,s,o){this.sliceDim=t,this.strides=e,this.paramsShape=o,this.variableNames=["x","indices"],this.outputShape=s;const r=te(s.length);let i=`
     int index;`;for(let a=0;a<this.sliceDim;a++)i+=`
           index = round(getIndices(coords[0], ${a}));
           out_of_bounds = out_of_bounds || index < 0;
@@ -16986,7 +16986,7 @@ return (log(1.0 + x) - log(1.0 - x)) / 2.0;`,fH=Gt({opSnippet:dH}),pH={kernelNam
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */function tq(n){const{inputs:t,backend:e}=n,{params:s,indices:o}=t,r=o.shape,i=r[r.length-1],a=X(s.shape),[l,c,u,h]=Op(s,o),d=ht({inputs:{x:o},backend:e,attrs:{shape:[c,i]}}),f=ht({inputs:{x:s},backend:e,attrs:{shape:[X(s.shape)/u,u]}});if(e.shouldExecuteOnCPU([s,o])||s.dtype==="string"){const x=e.readSync(o.dataId),b=e.bufferSync(s),w=oU(x,b,s.dtype,c,i,u,h,s.shape,a);return e.makeTensorInfo(l,s.dtype,w.values)}const p=new Q6(i,h,[c,u],s.shape),m=e.runWebGLProgram(p,[f,d],f.dtype),g=ht({inputs:{x:m},backend:e,attrs:{shape:l}});return e.disposeIntermediateTensorInfo(d),e.disposeIntermediateTensorInfo(f),e.disposeIntermediateTensorInfo(m),g}const eq={kernelName:S0,backendName:"webgl",kernelFunc:tq};/**
+ */function tq(n){const{inputs:t,backend:e}=n,{params:s,indices:o}=t,r=o.shape,i=r[r.length-1],a=X(s.shape),[l,c,u,h]=Op(s,o),d=ht({inputs:{x:o},backend:e,attrs:{shape:[c,i]}}),f=ht({inputs:{x:s},backend:e,attrs:{shape:[X(s.shape)/u,u]}});if(e.shouldExecuteOnCPU([s,o])||s.dtype==="string"){const x=e.readSync(o.dataId),b=e.bufferSync(s),w=oU(x,b,s.dtype,c,i,u,h,s.shape,a);return e.makeTensorInfo(l,s.dtype,w.values)}const p=new Qj(i,h,[c,u],s.shape),m=e.runWebGLProgram(p,[f,d],f.dtype),g=ht({inputs:{x:m},backend:e,attrs:{shape:l}});return e.disposeIntermediateTensorInfo(d),e.disposeIntermediateTensorInfo(f),e.disposeIntermediateTensorInfo(m),g}const eq={kernelName:S0,backendName:"webgl",kernelFunc:tq};/**
  * @license
  * Copyright 2017 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20270,7 +20270,7 @@ return a / b;`,VK=`
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */const j8=[EG,AG,FG,MG,zG,WG,GG,jG,YG,JG,eH,oH,aH,hH,pH,gH,bH,vH,IH,SH,RH,MH,zH,UH,HH,ZH,QH,sj,dG,ij,hj,mj,Cj,Ij,Sj,Tj,Rj,Fj,Mj,Bj,Wj,Gj,jj,Xj,Zj,e6,s6,i6,c6,h6,m6,y6,$6,S6,E6,R6,D6,F6,L6,P6,B6,G6,q6,Y6,J6,eq,oq,lq,dq,hG,pq,cj,xq,wq,$q,pG,Nq,Aq,_q,Mq,Bq,Gq,qq,Zq,eK,oK,iK,uK,dK,pK,bK,wK,vK,IK,SK,RK,FK,PK,jK,xG,YK,QK,nX,rX,qH,lX,uX,dX,mX,yX,gG,CX,$X,kX,NX,TX,KH,WK,AX,OX,zX,yG,UX,jX,YX,QX,s5,r5,l5,h5,p5,x5,w5,$5,N5,R5,F5,M5,OH,GK,B5,W5,G5,j5,K5,Y5,J5,t8,n8,r8,a8,c8,h8,p8,g8,b8,w8,UK,SG,$8,S8,T8,A8,O8,P8,NG,B8,W8,H8,cX];for(const n of j8)H0(n);const q8=(n,t)=>{const e=n.__vccOpts||n;for(const[s,o]of t)e[s]=o;return e},K8={class:"container"},X8={class:"main-layout"},Y8={class:"canvas-column"},Z8={key:0,class:"prediction"},J8={class:"pipeline-column"},Q8={class:"cnn-overview vertical"},tY={class:"connections"},eY=["x2"],nY={class:"layer conv16-layer"},sY=["title"],oY={class:"connections"},rY=["x1"],iY={class:"connections"},aY=["x2"],lY={class:"layer conv32-layer"},cY=["title"],uY={class:"connections"},hY=["x1"],dY={class:"connections to-digit-gauges"},fY=["x2","stroke"],pY={class:"digit-gauges"},mY={class:"digit-bar-outer"},gY={class:"digit-label"},qh=280,Kh=280,cb=52,ub=52,xY={__name:"App",setup(n){const t=hi(!1),e=hi(null);let s=null,o=!1,r=null;const i=hi(new Array(10).fill(0)),a=hi(null),l=hi([]);Hb(async()=>{e.value&&(s=e.value.getContext("2d"),s.fillStyle="#fff",s.fillRect(0,0,qh,Kh));try{r=await lL("tfjs_model/model.json"),console.log("Model loaded:",r)}catch(b){console.error("Error loading model:",b)}});function c(b){s&&(t.value=!0,o=!0,s.beginPath(),s.moveTo(b.offsetX,b.offsetY),f())}function u(b){!o||!s||(s.lineWidth=12,s.lineCap="round",s.strokeStyle="#000",s.lineTo(b.offsetX,b.offsetY),s.stroke(),s.beginPath(),s.moveTo(b.offsetX,b.offsetY),f())}function h(){t.value=!1,o=!1,f()}function d(){s&&(s.fillStyle="#fff",s.fillRect(0,0,qh,Kh),i.value=new Array(10).fill(0),a.value=null,l.value=[])}async function f(){if(!r||!e.value)return;const b=document.createElement("canvas");b.width=28,b.height=28;const w=b.getContext("2d");w.drawImage(e.value,0,0,28,28);const y=w.getImageData(0,0,28,28),C=new Float32Array(28*28);for(let F=0;F<28*28;F++){const P=F*4,U=y.data[P];C[F]=(255-U)/255}const $=ZR(C,[1,28,28,1]);let S;try{S=r.predict($)}catch(F){console.error("Predict error:",F),Rt($);return}let T,k,I;if(Array.isArray(S)?[T,k,I]=S:(T=S.Identity||S.output_0||null,k=S.Identity_1||S.output_1||null,I=S.Identity_2||S.output_2||null),!T){console.warn("No logits found."),Rt([$,S]);return}const A=(await T.data()).map(F=>Math.exp(F)),L=A.reduce((F,P)=>F+P,0),B=A.map(F=>F/L);if(i.value=B,a.value=B.indexOf(Math.max(...B)),l.value=[],k){const F=await k.data();l.value.push(p(F,k.shape))}if(I){const F=await I.data();l.value.push(p(F,I.shape))}Rt([$,S,T,k,I]),await Mb(),m()}function p(b,w){const[y,C,$,S]=w,T=[];let k=0;for(let I=0;I<S;I++){const v=new Array(C*$);for(let A=0;A<C*$;A++)v[A]=b[k++];T.push(v)}return T}function m(){document.querySelectorAll(".layer-container").forEach((w,y)=>{const C=w.querySelector(".map-grid");if(!C)return;const $=l.value[y];C.querySelectorAll("canvas").forEach((T,k)=>{const I=T.getContext("2d");if(!I)return;const v=$[k];if(!v)return;const A=v.length,L=Math.sqrt(A),B=L,F=Math.min(...v),U=Math.max(...v)-F||1e-5,z=new Uint8ClampedArray(A*4);for(let J=0;J<A;J++){const nt=(v[J]-F)/U,lt=Math.round(nt*255);z[J*4+0]=lt,z[J*4+1]=lt,z[J*4+2]=lt,z[J*4+3]=255}const q=new ImageData(z,B,L),Y=document.createElement("canvas");Y.width=B,Y.height=L,Y.getContext("2d").putImageData(q,0,0),I.clearRect(0,0,cb,ub),I.drawImage(Y,0,0,cb,ub)})})}function g(b){const w=[204,204,204],y=[33,150,243],C=Math.round(w[0]+(y[0]-w[0])*b),$=Math.round(w[1]+(y[1]-w[1])*b),S=Math.round(w[2]+(y[2]-w[2])*b);return`rgb(${C}, ${$}, ${S})`}function x(b){return 1+3*b+"px"}return(b,w)=>(Le(),Ue(Me,null,[Xt("div",K8,[w[3]||(w[3]=Xt("h2",null,"MNIST Classifier using a CNN model.",-1)),w[4]||(w[4]=Xt("p",null,"Draw a digit.",-1)),Xt("div",X8,[Xt("div",Y8,[Xt("canvas",{ref_key:"drawingCanvas",ref:e,width:qh,height:Kh,onMousedown:c,onMousemove:u,onMouseup:h,style:{border:"2px solid #444",cursor:"crosshair"}},null,544),Xt("div",{class:"buttons"},[Xt("button",{onClick:d},"Clear")]),a.value!==null?(Le(),Ue("div",Z8,[Xt("h2",null,"Predicted Digit: "+Xh(a.value),1)])):Bk("",!0)]),Xt("div",J8,[Xt("div",Q8,[w[0]||(w[0]=Xt("div",{class:"layer input-layer"},[Xt("div",{class:"single-node"},"Input")],-1)),(Le(),Ue("svg",tY,[(Le(),Ue(Me,null,Ks(16,y=>Xt("line",{key:y,x1:"50%",y1:"0",x2:(y-.5)/16*100+"%",y2:"100%",stroke:"#999","stroke-width":"1"},null,8,eY)),64))])),Xt("div",nY,[(Le(),Ue(Me,null,Ks(16,y=>Xt("div",{key:y,class:"filter-dot",title:"Filter "+y},null,8,sY)),64))]),(Le(),Ue("svg",oY,[(Le(),Ue(Me,null,Ks(16,y=>Xt("line",{key:y,x1:(y-.5)/16*100+"%",y1:"0",x2:"50%",y2:"100%",stroke:"#aaa","stroke-width":"1"},null,8,rY)),64))])),w[1]||(w[1]=Xt("div",{class:"layer pool1-layer"},[Xt("div",{class:"single-node"},"MaxPool(2×2)")],-1)),(Le(),Ue("svg",iY,[(Le(),Ue(Me,null,Ks(32,y=>Xt("line",{key:y,x1:"50%",y1:"0",x2:(y-.5)/32*100+"%",y2:"100%",stroke:"#999","stroke-width":"1"},null,8,aY)),64))])),Xt("div",lY,[(Le(),Ue(Me,null,Ks(32,y=>Xt("div",{key:y,class:"filter-dot",title:"Filter "+y},null,8,cY)),64))]),(Le(),Ue("svg",uY,[(Le(),Ue(Me,null,Ks(32,y=>Xt("line",{key:y,x1:(y-.5)/32*100+"%",y1:"0",x2:"50%",y2:"100%",stroke:"#bbb","stroke-width":"1"},null,8,hY)),64))])),w[2]||(w[2]=Xt("div",{class:"layer pool2-layer"},[Xt("div",{class:"single-node"},"MaxPool(2×2)")],-1)),(Le(),Ue("svg",dY,[(Le(!0),Ue(Me,null,Ks(i.value,(y,C)=>(Le(),Ue("line",{key:C,x1:"50%",y1:"0",x2:(C+.5)/i.value.length*100+"%",y2:"100%",stroke:g(y),style:_i({strokeWidth:x(y)}),class:Lc({pulsing:t.value})},null,14,fY))),128))]))]),Xt("div",pY,[(Le(!0),Ue(Me,null,Ks(i.value,(y,C)=>(Le(),Ue("div",{class:"digit-gauge",key:C},[Xt("div",mY,[Xt("div",{class:"digit-bar-fill",style:_i({height:(y*100).toFixed(1)+"%"})},null,4)]),Xt("div",gY,"Digit "+Xh(C),1)]))),128))])])])]),w[5]||(w[5]=zk(`<section class="explanations" data-v-f9cfaf32><h2 data-v-f9cfaf32>How This Model Was Trained</h2><p data-v-f9cfaf32> This MNIST digit classifier uses a custom CNN architecture built with <strong data-v-f9cfaf32>TensorFlow Keras</strong>. </p><ul data-v-f9cfaf32><li data-v-f9cfaf32><strong data-v-f9cfaf32>Convolution + MaxPooling:</strong> I&#39;ve used two convolutional blocks (16 and 32 filters) to extract features, each followed by a 2×2 MaxPooling layer to reduce spatial dimensions. </li><li data-v-f9cfaf32><strong data-v-f9cfaf32>Flatten + Dense Layer:</strong> Then I flatten the output of the last convolution block and feed it into a <code data-v-f9cfaf32>Dense</code> layer with 10 units for final classification. </li><li data-v-f9cfaf32><strong data-v-f9cfaf32>Data Augmentation:</strong> On the training set, a random rotation, translation, zoom, and contrast adjustments are applied to increase the variety of inputs and improve generalization. </li></ul><p data-v-f9cfaf32> Below is the <strong data-v-f9cfaf32>exact Python code</strong> used to build and train this model. After training, the model is converted to <code data-v-f9cfaf32>TensorFlow.js</code> format so it can run directly in your browser: </p><div class="code-container" data-v-f9cfaf32><pre data-v-f9cfaf32><code data-v-f9cfaf32>
+ */const j8=[EG,AG,FG,MG,zG,WG,GG,jG,YG,JG,eH,oH,aH,hH,pH,gH,bH,vH,IH,SH,RH,MH,zH,UH,HH,ZH,QH,s6,dG,i6,h6,m6,C6,I6,S6,T6,R6,F6,M6,B6,W6,G6,j6,X6,Z6,ej,sj,ij,cj,hj,mj,yj,$j,Sj,Ej,Rj,Dj,Fj,Lj,Pj,Bj,Gj,qj,Yj,Jj,eq,oq,lq,dq,hG,pq,c6,xq,wq,$q,pG,Nq,Aq,_q,Mq,Bq,Gq,qq,Zq,eK,oK,iK,uK,dK,pK,bK,wK,vK,IK,SK,RK,FK,PK,jK,xG,YK,QK,nX,rX,qH,lX,uX,dX,mX,yX,gG,CX,$X,kX,NX,TX,KH,WK,AX,OX,zX,yG,UX,jX,YX,QX,s5,r5,l5,h5,p5,x5,w5,$5,N5,R5,F5,M5,OH,GK,B5,W5,G5,j5,K5,Y5,J5,t8,n8,r8,a8,c8,h8,p8,g8,b8,w8,UK,SG,$8,S8,T8,A8,O8,P8,NG,B8,W8,H8,cX];for(const n of j8)H0(n);const q8=(n,t)=>{const e=n.__vccOpts||n;for(const[s,o]of t)e[s]=o;return e},K8={class:"container"},X8={class:"main-layout"},Y8={class:"canvas-column"},Z8={key:0,class:"prediction"},J8={class:"pipeline-column"},Q8={class:"cnn-overview vertical"},tY={class:"connections"},eY=["x2"],nY={class:"layer conv16-layer"},sY=["title"],oY={class:"connections"},rY=["x1"],iY={class:"connections"},aY=["x2"],lY={class:"layer conv32-layer"},cY=["title"],uY={class:"connections"},hY=["x1"],dY={class:"connections to-digit-gauges"},fY=["x2","stroke"],pY={class:"digit-gauges"},mY={class:"digit-bar-outer"},gY={class:"digit-label"},qh=280,Kh=280,cb=52,ub=52,xY={__name:"App",setup(n){const t=hi(!1),e=hi(null);let s=null,o=!1,r=null;const i=hi(new Array(10).fill(0)),a=hi(null),l=hi([]);Hb(async()=>{e.value&&(s=e.value.getContext("2d"),s.fillStyle="#fff",s.fillRect(0,0,qh,Kh));try{r=await lL("tfjs_model/model.json"),console.log("Model loaded:",r)}catch(b){console.error("Error loading model:",b)}});function c(b){s&&(t.value=!0,o=!0,s.beginPath(),s.moveTo(b.offsetX,b.offsetY),f())}function u(b){!o||!s||(s.lineWidth=12,s.lineCap="round",s.strokeStyle="#000",s.lineTo(b.offsetX,b.offsetY),s.stroke(),s.beginPath(),s.moveTo(b.offsetX,b.offsetY),f())}function h(){t.value=!1,o=!1,f()}function d(){s&&(s.fillStyle="#fff",s.fillRect(0,0,qh,Kh),i.value=new Array(10).fill(0),a.value=null,l.value=[])}async function f(){if(!r||!e.value)return;const b=document.createElement("canvas");b.width=28,b.height=28;const w=b.getContext("2d");w.drawImage(e.value,0,0,28,28);const y=w.getImageData(0,0,28,28),C=new Float32Array(28*28);for(let F=0;F<28*28;F++){const P=F*4,U=y.data[P];C[F]=(255-U)/255}const $=ZR(C,[1,28,28,1]);let S;try{S=r.predict($)}catch(F){console.error("Predict error:",F),Rt($);return}let T,k,I;if(Array.isArray(S)?[T,k,I]=S:(T=S.Identity||S.output_0||null,k=S.Identity_1||S.output_1||null,I=S.Identity_2||S.output_2||null),!T){console.warn("No logits found."),Rt([$,S]);return}const A=(await T.data()).map(F=>Math.exp(F)),L=A.reduce((F,P)=>F+P,0),B=A.map(F=>F/L);if(i.value=B,a.value=B.indexOf(Math.max(...B)),l.value=[],k){const F=await k.data();l.value.push(p(F,k.shape))}if(I){const F=await I.data();l.value.push(p(F,I.shape))}Rt([$,S,T,k,I]),await Mb(),m()}function p(b,w){const[y,C,$,S]=w,T=[];let k=0;for(let I=0;I<S;I++){const v=new Array(C*$);for(let A=0;A<C*$;A++)v[A]=b[k++];T.push(v)}return T}function m(){document.querySelectorAll(".layer-container").forEach((w,y)=>{const C=w.querySelector(".map-grid");if(!C)return;const $=l.value[y];C.querySelectorAll("canvas").forEach((T,k)=>{const I=T.getContext("2d");if(!I)return;const v=$[k];if(!v)return;const A=v.length,L=Math.sqrt(A),B=L,F=Math.min(...v),U=Math.max(...v)-F||1e-5,z=new Uint8ClampedArray(A*4);for(let J=0;J<A;J++){const nt=(v[J]-F)/U,lt=Math.round(nt*255);z[J*4+0]=lt,z[J*4+1]=lt,z[J*4+2]=lt,z[J*4+3]=255}const q=new ImageData(z,B,L),Y=document.createElement("canvas");Y.width=B,Y.height=L,Y.getContext("2d").putImageData(q,0,0),I.clearRect(0,0,cb,ub),I.drawImage(Y,0,0,cb,ub)})})}function g(b){const w=[204,204,204],y=[33,150,243],C=Math.round(w[0]+(y[0]-w[0])*b),$=Math.round(w[1]+(y[1]-w[1])*b),S=Math.round(w[2]+(y[2]-w[2])*b);return`rgb(${C}, ${$}, ${S})`}function x(b){return 1+3*b+"px"}return(b,w)=>(Le(),Ue(Me,null,[Xt("div",K8,[w[5]||(w[5]=Xt("h2",null,"MNIST Classifier using a CNN model.",-1)),w[6]||(w[6]=Xt("p",null,"Draw a digit.",-1)),Xt("div",X8,[Xt("div",Y8,[Xt("canvas",{ref_key:"drawingCanvas",ref:e,width:qh,height:Kh,onMousedown:c,onMousemove:u,onMouseup:h,onMouseleave:h,onTouchstart:w[0]||(w[0]=(...y)=>b.handleTouchStart&&b.handleTouchStart(...y)),onTouchmove:w[1]||(w[1]=(...y)=>b.handleTouchMove&&b.handleTouchMove(...y)),onTouchend:h,style:{border:"2px solid #444",cursor:"crosshair"}},null,544),Xt("div",{class:"buttons"},[Xt("button",{onClick:d},"Clear")]),a.value!==null?(Le(),Ue("div",Z8,[Xt("h2",null,"Predicted Digit: "+Xh(a.value),1)])):Bk("",!0)]),Xt("div",J8,[Xt("div",Q8,[w[2]||(w[2]=Xt("div",{class:"layer input-layer"},[Xt("div",{class:"single-node"},"Input")],-1)),(Le(),Ue("svg",tY,[(Le(),Ue(Me,null,Ks(16,y=>Xt("line",{key:y,x1:"50%",y1:"0",x2:(y-.5)/16*100+"%",y2:"100%",stroke:"#999","stroke-width":"1"},null,8,eY)),64))])),Xt("div",nY,[(Le(),Ue(Me,null,Ks(16,y=>Xt("div",{key:y,class:"filter-dot",title:"Filter "+y},null,8,sY)),64))]),(Le(),Ue("svg",oY,[(Le(),Ue(Me,null,Ks(16,y=>Xt("line",{key:y,x1:(y-.5)/16*100+"%",y1:"0",x2:"50%",y2:"100%",stroke:"#aaa","stroke-width":"1"},null,8,rY)),64))])),w[3]||(w[3]=Xt("div",{class:"layer pool1-layer"},[Xt("div",{class:"single-node"},"MaxPool(2×2)")],-1)),(Le(),Ue("svg",iY,[(Le(),Ue(Me,null,Ks(32,y=>Xt("line",{key:y,x1:"50%",y1:"0",x2:(y-.5)/32*100+"%",y2:"100%",stroke:"#999","stroke-width":"1"},null,8,aY)),64))])),Xt("div",lY,[(Le(),Ue(Me,null,Ks(32,y=>Xt("div",{key:y,class:"filter-dot",title:"Filter "+y},null,8,cY)),64))]),(Le(),Ue("svg",uY,[(Le(),Ue(Me,null,Ks(32,y=>Xt("line",{key:y,x1:(y-.5)/32*100+"%",y1:"0",x2:"50%",y2:"100%",stroke:"#bbb","stroke-width":"1"},null,8,hY)),64))])),w[4]||(w[4]=Xt("div",{class:"layer pool2-layer"},[Xt("div",{class:"single-node"},"MaxPool(2×2)")],-1)),(Le(),Ue("svg",dY,[(Le(!0),Ue(Me,null,Ks(i.value,(y,C)=>(Le(),Ue("line",{key:C,x1:"50%",y1:"0",x2:(C+.5)/i.value.length*100+"%",y2:"100%",stroke:g(y),style:_i({strokeWidth:x(y)}),class:Lc({pulsing:t.value})},null,14,fY))),128))]))]),Xt("div",pY,[(Le(!0),Ue(Me,null,Ks(i.value,(y,C)=>(Le(),Ue("div",{class:"digit-gauge",key:C},[Xt("div",mY,[Xt("div",{class:"digit-bar-fill",style:_i({height:(y*100).toFixed(1)+"%"})},null,4)]),Xt("div",gY,"Digit "+Xh(C),1)]))),128))])])])]),w[7]||(w[7]=zk(`<section class="explanations" data-v-9580d46f><h2 data-v-9580d46f>How This Model Was Trained</h2><p data-v-9580d46f> This MNIST digit classifier uses a custom CNN architecture built with <strong data-v-9580d46f>TensorFlow Keras</strong>. </p><ul data-v-9580d46f><li data-v-9580d46f><strong data-v-9580d46f>Convolution + MaxPooling:</strong> I&#39;ve used two convolutional blocks (16 and 32 filters) to extract features, each followed by a 2×2 MaxPooling layer to reduce spatial dimensions. </li><li data-v-9580d46f><strong data-v-9580d46f>Flatten + Dense Layer:</strong> Then I flatten the output of the last convolution block and feed it into a <code data-v-9580d46f>Dense</code> layer with 10 units for final classification. </li><li data-v-9580d46f><strong data-v-9580d46f>Data Augmentation:</strong> On the training set, a random rotation, translation, zoom, and contrast adjustments are applied to increase the variety of inputs and improve generalization. </li></ul><p data-v-9580d46f> Below is the <strong data-v-9580d46f>exact Python code</strong> used to build and train this model. After training, the model is converted to <code data-v-9580d46f>TensorFlow.js</code> format so it can run directly in your browser: </p><div class="code-container" data-v-9580d46f><pre data-v-9580d46f><code data-v-9580d46f>
 import os
 os.environ[&quot;TF_USE_LEGACY_KERAS&quot;] = &quot;1&quot;
 
@@ -20353,4 +20353,4 @@ if __name__ == &quot;__main__&quot;:
     trained_model = train_keras_model(epochs=10)
     tfjs.converters.save_keras_model(trained_model, &quot;tfjs_model&quot;)
     print(&quot;Saved TensorFlow.js model to frontend/public/tfjs_model&quot;)
-      </code></pre></div><p data-v-f9cfaf32> Finally, the model is loaded (<code data-v-f9cfaf32>model.json</code>) on the front end and run inference on the drawing you create in the canvas. </p></section>`,1))],64))}},bY=q8(xY,[["__scopeId","data-v-f9cfaf32"]]);wS(bY).mount("#app");
+      </code></pre></div><p data-v-9580d46f> Finally, the model is loaded (<code data-v-9580d46f>model.json</code>) on the front end and run inference on the drawing you create in the canvas. </p></section>`,1))],64))}},bY=q8(xY,[["__scopeId","data-v-9580d46f"]]);wS(bY).mount("#app");
