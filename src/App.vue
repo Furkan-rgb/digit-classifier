@@ -92,8 +92,9 @@
       </div>
 
       <p class="net-hint">
-        Each tile is one convolutional filter's response to your digit —
-        brighter means a stronger activation. Draw above to watch them light up.
+        Each tile is one convolutional filter's response to your digit. Colors
+        run cool to warm — dark purple is no response, bright orange and yellow
+        are strong activations. Draw above to watch them light up.
       </p>
     </div>
   </div>
@@ -412,6 +413,30 @@ function extractConv2DActivationMaps(floatData, shape) {
   return out;
 }
 
+/**
+ * Maps an activation value in [0, 1] to an "inferno"-style heat color
+ * (dark purple -> magenta -> orange -> pale yellow). Warmer = stronger.
+ */
+function heatColor(t) {
+  const stops = [
+    [0, 0, 4],
+    [87, 16, 110],
+    [188, 55, 84],
+    [249, 142, 9],
+    [252, 255, 164],
+  ];
+  const x = Math.max(0, Math.min(1, t)) * (stops.length - 1);
+  const i = Math.floor(x);
+  const f = x - i;
+  const a = stops[i];
+  const b = stops[Math.min(i + 1, stops.length - 1)];
+  return [
+    Math.round(a[0] + (b[0] - a[0]) * f),
+    Math.round(a[1] + (b[1] - a[1]) * f),
+    Math.round(a[2] + (b[2] - a[2]) * f),
+  ];
+}
+
 function drawActivationMapsOnCanvas() {
   const layerEls = document.querySelectorAll(".layer-container");
 
@@ -437,10 +462,10 @@ function drawActivationMapsOnCanvas() {
       const buf = new Uint8ClampedArray(length * 4);
       for (let i = 0; i < length; i++) {
         const val = (channelData[i] - minVal) / range; // 0..1
-        const gray = Math.round(val * 255);
-        buf[i * 4 + 0] = gray;
-        buf[i * 4 + 1] = gray;
-        buf[i * 4 + 2] = gray;
+        const [r, g, b] = heatColor(val);
+        buf[i * 4 + 0] = r;
+        buf[i * 4 + 1] = g;
+        buf[i * 4 + 2] = b;
         buf[i * 4 + 3] = 255; // A
       }
       const imgData = new ImageData(buf, W, H);
