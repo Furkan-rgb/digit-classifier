@@ -30,117 +30,9 @@
         </div>
       </div>
 
-      <!-- Right Column: CNN Layers (vertical) + Probability Gauges -->
-      <div class="pipeline-column">
-        <!-- CNN Overview (vertical stacking, smaller spacing) -->
-        <div class="cnn-overview vertical">
-          <!-- 1) INPUT LAYER (single node) -->
-          <div class="layer input-layer">
-            <div class="single-node">Input</div>
-          </div>
-
-          <!-- Lines: Input -> Conv16 (16 filters) -->
-          <svg class="connections">
-            <line
-              v-for="n in 16"
-              :key="n"
-              x1="50%"
-              y1="0"
-              :x2="((n - 0.5) / 16) * 100 + '%'"
-              y2="100%"
-              stroke="#999"
-              stroke-width="1"
-            />
-          </svg>
-
-          <!-- 2) CONV 16 FILTERS (16 dots) -->
-          <div class="layer conv16-layer">
-            <div
-              v-for="n in 16"
-              :key="n"
-              class="filter-dot"
-              :title="'Filter ' + n"
-            ></div>
-          </div>
-
-          <!-- Lines: Conv16 -> Pool1 (single node) -->
-          <svg class="connections">
-            <line
-              v-for="n in 16"
-              :key="n"
-              :x1="((n - 0.5) / 16) * 100 + '%'"
-              y1="0"
-              x2="50%"
-              y2="100%"
-              stroke="#aaa"
-              stroke-width="1"
-            />
-          </svg>
-
-          <!-- 3) MAXPOOL(2×2) LAYER (single node) -->
-          <div class="layer pool1-layer">
-            <div class="single-node">MaxPool(2×2)</div>
-          </div>
-
-          <!-- Lines: Pool1 -> Conv32 (32 filters) -->
-          <svg class="connections">
-            <line
-              v-for="n in 32"
-              :key="n"
-              x1="50%"
-              y1="0"
-              :x2="((n - 0.5) / 32) * 100 + '%'"
-              y2="100%"
-              stroke="#999"
-              stroke-width="1"
-            />
-          </svg>
-
-          <!-- 4) CONV 32 FILTERS (32 dots) -->
-          <div class="layer conv32-layer">
-            <div
-              v-for="n in 32"
-              :key="n"
-              class="filter-dot"
-              :title="'Filter ' + n"
-            ></div>
-          </div>
-
-          <!-- Lines: Conv32 -> Pool2 (single node) -->
-          <svg class="connections">
-            <line
-              v-for="n in 32"
-              :key="n"
-              :x1="((n - 0.5) / 32) * 100 + '%'"
-              y1="0"
-              x2="50%"
-              y2="100%"
-              stroke="#bbb"
-              stroke-width="1"
-            />
-          </svg>
-
-          <!-- 5) MAXPOOL(2×2) LAYER (single node) -->
-          <div class="layer pool2-layer">
-            <div class="single-node">MaxPool(2×2)</div>
-          </div>
-
-          <!-- Lines: Pool2 -> each digit gauge (10 lines) -->
-          <svg class="connections to-digit-gauges">
-            <line
-              v-for="(val, idx) in probabilities"
-              :key="idx"
-              x1="50%"
-              y1="0"
-              :x2="((idx + 0.5) / probabilities.length) * 100 + '%'"
-              y2="100%"
-              :stroke="getGaugeLineColor(val)"
-              :style="{ strokeWidth: getGaugeLineWidth(val) }"
-              :class="{ pulsing: drawingActive }"
-            />
-          </svg>
-        </div>
-
+      <!-- Right: live confidence for digits 0-9 -->
+      <div class="results-column">
+        <span class="panel-caption">Confidence</span>
         <!-- Probability Gauges for digits 0-9 -->
         <div class="digit-gauges">
           <div
@@ -160,12 +52,50 @@
       </div>
     </div>
 
-    <!-- Activation Maps below (unchanged logic) -->
-    <!--
-    <div class="activations" v-if="activationMaps.length > 0">
-      ...
+    <!-- A real window into the CNN: the low-res input it actually receives,
+         plus the live convolutional feature maps for the current drawing -->
+    <div class="network-view">
+      <h3 class="network-view-title">What the network sees</h3>
+
+      <div class="net-section net-input">
+        <span class="panel-caption">Model input (28×28)</span>
+        <canvas
+          ref="inputPreview"
+          class="input-preview"
+          width="28"
+          height="28"
+        ></canvas>
+      </div>
+
+      <div class="net-section layer-container">
+        <span class="panel-caption">Layer 1 · 16 feature maps</span>
+        <div class="map-grid">
+          <canvas
+            v-for="n in 16"
+            :key="'l1-' + n"
+            :width="mapWidth"
+            :height="mapHeight"
+          ></canvas>
+        </div>
+      </div>
+
+      <div class="net-section layer-container">
+        <span class="panel-caption">Layer 2 · 32 feature maps</span>
+        <div class="map-grid">
+          <canvas
+            v-for="n in 32"
+            :key="'l2-' + n"
+            :width="mapWidth"
+            :height="mapHeight"
+          ></canvas>
+        </div>
+      </div>
+
+      <p class="net-hint">
+        Each tile is one convolutional filter's response to your digit —
+        brighter means a stronger activation. Draw above to watch them light up.
+      </p>
     </div>
-    -->
   </div>
 
   <section class="explanations">
@@ -296,15 +226,13 @@ if __name__ == "__main__":
 import { ref, onMounted, nextTick } from "vue";
 import * as tf from "@tensorflow/tfjs";
 
-// Track whether user is actively drawing right now
-const drawingActive = ref(false);
-
 const canvasWidth = 280;
 const canvasHeight = 280;
 const mapWidth = 52;
 const mapHeight = 52;
 
 const drawingCanvas = ref(null);
+const inputPreview = ref(null);
 let ctx = null;
 let drawing = false;
 
@@ -347,7 +275,6 @@ function getPos(e) {
 
 function startDrawing(e) {
   if (!ctx) return;
-  drawingActive.value = true; // <--- Set to TRUE when drawing starts
   drawing = true;
   const { x, y } = getPos(e);
   ctx.beginPath();
@@ -370,7 +297,6 @@ function draw(e) {
 }
 
 function stopDrawing() {
-  drawingActive.value = false; // <--- Set to FALSE when drawing stops
   drawing = false;
   runInference();
 }
@@ -383,6 +309,15 @@ function clearCanvas() {
   probabilities.value = new Array(10).fill(0);
   prediction.value = null;
   activationMaps.value = [];
+
+  // Wipe the input preview and every feature-map thumbnail
+  if (inputPreview.value) {
+    const pctx = inputPreview.value.getContext("2d");
+    pctx.clearRect(0, 0, inputPreview.value.width, inputPreview.value.height);
+  }
+  document.querySelectorAll(".map-grid canvas").forEach((cv) => {
+    cv.getContext("2d").clearRect(0, 0, cv.width, cv.height);
+  });
 }
 
 // Run inference
@@ -405,6 +340,10 @@ async function runInference() {
     inputBuffer[i] = (255 - r) / 255.0;
   }
   const inputTensor = tf.tensor4d(inputBuffer, [1, 28, 28, 1]);
+
+  // Mirror the normalized input onto the preview so visitors can see the
+  // low-res, inverted image the network actually receives
+  drawInputPreview(inputBuffer);
 
   let results;
   try {
@@ -519,27 +458,21 @@ function drawActivationMapsOnCanvas() {
 }
 
 /**
- * Returns a color interpolated between two colors based on prob (0..1).
- * Example: from #ccc when prob=0 to #2196f3 when prob=1.
+ * Renders the 28×28 normalized model input (white strokes on black, the way
+ * the network sees it) onto the small preview canvas.
  */
-function getGaugeLineColor(prob) {
-  const startColor = [204, 204, 204]; // #ccc
-  const endColor = [33, 150, 243]; // #2196f3
-
-  const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * prob);
-  const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * prob);
-  const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * prob);
-
-  return `rgb(${r}, ${g}, ${b})`;
-}
-
-/**
- * Returns a stroke width between 1px (prob=0) and 4px (prob=1).
- */
-function getGaugeLineWidth(prob) {
-  const minW = 1;
-  const maxW = 4;
-  return minW + (maxW - minW) * prob + "px";
+function drawInputPreview(inputBuffer) {
+  if (!inputPreview.value) return;
+  const pctx = inputPreview.value.getContext("2d");
+  const previewData = pctx.createImageData(28, 28);
+  for (let i = 0; i < 28 * 28; i++) {
+    const gray = Math.round(inputBuffer[i] * 255);
+    previewData.data[i * 4 + 0] = gray;
+    previewData.data[i * 4 + 1] = gray;
+    previewData.data[i * 4 + 2] = gray;
+    previewData.data[i * 4 + 3] = 255;
+  }
+  pctx.putImageData(previewData, 0, 0);
 }
 </script>
 
@@ -591,67 +524,21 @@ function getGaugeLineWidth(prob) {
   font-weight: bold;
 }
 
-/* Column with CNN overview + digit gauges */
-.pipeline-column {
+/* Right-hand column holding the live confidence bars */
+.results-column {
   flex: 0 0 auto;
   min-width: 300px;
 }
 
-/* CNN Overview container */
-.cnn-overview.vertical {
-  width: 100%; /* Let it span the entire .pipeline-column width */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-/* Each layer container */
-.layer {
-  margin: 0.2rem 0; /* Small vertical spacing between layers */
-}
-
-/* Single-node layers: just center the node horizontally */
-.layer.input-layer,
-.layer.pool1-layer,
-.layer.pool2-layer {
-  width: 100%;
-  display: flex;
-  justify-content: center; /* single node in center */
-}
-
-/* Multi-filter layers: spread out the dots across the full width */
-.layer.conv16-layer,
-.layer.conv32-layer {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Single node (Input, Pool, etc.) */
-.single-node {
-  padding: 4px 8px;
-  border: 1px solid #999;
-  border-radius: 6px;
-  background-color: #f5f5f5;
-  font-size: 0.85rem;
-  font-weight: bold;
-}
-
-/* Filter dots */
-.filter-dot {
-  width: 6px;
-  height: 6px;
-  background: #666;
-  border-radius: 50%;
-  margin: 2px;
-}
-
-/* The SVG that draws lines between layers */
-.connections {
-  width: 100%; /* Key: match layer width so percentages align */
-  height: 40px; /* Adjust as needed for spacing */
-  overflow: visible; /* Let lines extend outside the box if needed */
+/* Small uppercase caption above each panel/section */
+.panel-caption {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
 }
 
 /* Probability Gauges */
@@ -694,27 +581,56 @@ function getGaugeLineWidth(prob) {
   margin-top: 4px;
 }
 
-/* Activation Maps */
-.activations {
-  margin-top: 2rem;
-  text-align: left;
+/* "What the network sees" panel */
+.network-view {
+  margin-top: 2.5rem;
+  padding: 1.25rem;
+  background: rgba(127, 127, 127, 0.06);
+  border: 1px solid rgba(127, 127, 127, 0.18);
+  border-radius: 10px;
+  text-align: center;
 }
 
-.layer-container {
-  margin-bottom: 1rem;
+.network-view-title {
+  margin: 0 0 1.25rem;
+}
+
+.net-section {
+  max-width: 760px;
+  margin: 0 auto 1.25rem;
+  text-align: center;
+}
+
+/* The low-res model input, scaled up with crisp (non-blurred) pixels */
+.input-preview {
+  width: 84px;
+  height: 84px;
+  image-rendering: pixelated;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 4px;
+  background: #000;
 }
 
 .map-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  margin: 8px 0;
+  gap: 5px;
+  justify-content: center;
 }
 
 .map-grid canvas {
-  background: #ccc;
+  width: 40px;
+  height: 40px;
+  background: #111;
   display: block;
-  border: 1px solid #999;
+  border-radius: 3px;
+}
+
+.net-hint {
+  max-width: 540px;
+  margin: 1.25rem auto 0;
+  font-size: 0.85rem;
+  opacity: 0.75;
 }
 
 /* Explanations and Code Sections */
@@ -769,33 +685,30 @@ function getGaugeLineWidth(prob) {
     gap: 1.5rem;
   }
 
-  .canvas-column {
+  /* Canvas, then confidence bars, then the network panel stack naturally */
+  .canvas-column,
+  .results-column {
     min-width: 0;
     width: 100%;
-    max-width: 320px;
-    order: 1; /* canvas + predicted digit first */
+    max-width: 360px;
   }
 
-  /* Flatten the pipeline column so the confidence bars and the network
-     diagram can be ordered independently of the canvas */
-  .pipeline-column {
-    display: contents;
-  }
-
-  /* Confidence bars sit right under the canvas; the decorative network
-     diagram drops below them */
   .digit-gauges {
-    order: 2;
-    width: 100%;
-    max-width: 320px;
     gap: 5px;
   }
 
-  .cnn-overview.vertical {
-    order: 3;
-    width: 100%;
-    max-width: 320px;
-    margin-top: 0.5rem;
+  .network-view {
+    padding: 1rem 0.75rem;
+  }
+
+  .input-preview {
+    width: 72px;
+    height: 72px;
+  }
+
+  .map-grid canvas {
+    width: 34px;
+    height: 34px;
   }
 
   .digit-gauge {
