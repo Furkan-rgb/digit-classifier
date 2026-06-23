@@ -9,12 +9,16 @@
       <div class="canvas-column">
         <canvas
           ref="drawingCanvas"
+          class="drawing-canvas"
           :width="canvasWidth"
           :height="canvasHeight"
           @mousedown="startDrawing"
           @mousemove="draw"
           @mouseup="stopDrawing"
-          style="border: 2px solid #444; cursor: crosshair"
+          @mouseleave="stopDrawing"
+          @touchstart.prevent="startDrawing"
+          @touchmove.prevent="draw"
+          @touchend.prevent="stopDrawing"
         ></canvas>
 
         <div class="buttons">
@@ -150,7 +154,7 @@
                 :style="{ height: (val * 100).toFixed(1) + '%' }"
               ></div>
             </div>
-            <div class="digit-label">Digit {{ idx }}</div>
+            <div class="digit-label"><span class="digit-word">Digit </span>{{ idx }}</div>
           </div>
         </div>
       </div>
@@ -324,24 +328,40 @@ onMounted(async () => {
   }
 });
 
+// Resolve a pointer position for both mouse and touch events, mapping the
+// page coordinates onto the canvas' internal resolution. This keeps drawing
+// accurate even when the canvas is scaled down to fit smaller screens.
+function getPos(e) {
+  const rect = drawingCanvas.value.getBoundingClientRect();
+  const point = e.touches && e.touches.length ? e.touches[0] : e;
+  const scaleX = drawingCanvas.value.width / rect.width;
+  const scaleY = drawingCanvas.value.height / rect.height;
+  return {
+    x: (point.clientX - rect.left) * scaleX,
+    y: (point.clientY - rect.top) * scaleY,
+  };
+}
+
 function startDrawing(e) {
   if (!ctx) return;
   drawingActive.value = true; // <--- Set to TRUE when drawing starts
   drawing = true;
+  const { x, y } = getPos(e);
   ctx.beginPath();
-  ctx.moveTo(e.offsetX, e.offsetY);
+  ctx.moveTo(x, y);
   runInference();
 }
 
 function draw(e) {
   if (!drawing || !ctx) return;
+  const { x, y } = getPos(e);
   ctx.lineWidth = 12;
   ctx.lineCap = "round";
   ctx.strokeStyle = "#000";
-  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.lineTo(x, y);
   ctx.stroke();
   ctx.beginPath();
-  ctx.moveTo(e.offsetX, e.offsetY);
+  ctx.moveTo(x, y);
 
   runInference();
 }
@@ -545,6 +565,20 @@ function getGaugeLineWidth(prob) {
   text-align: center;
 }
 
+/* Drawing surface: keep it square and let it shrink to fit the screen */
+.drawing-canvas {
+  border: 2px solid #444;
+  cursor: crosshair;
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  touch-action: none; /* don't scroll/zoom the page while drawing */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .buttons {
   margin-top: 1rem;
 }
@@ -703,5 +737,55 @@ function getGaugeLineWidth(prob) {
   font-family: "Source Code Pro", monospace;
   font-size: 0.9rem;
   line-height: 1.4em;
+}
+
+/* --- Mobile / narrow screens --- */
+@media (max-width: 700px) {
+  .container {
+    margin: 1rem auto;
+  }
+
+  /* Stack the canvas and the pipeline on top of each other */
+  .main-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .canvas-column,
+  .pipeline-column {
+    min-width: 0;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  /* Let the 10 gauges share the available width instead of overflowing */
+  .digit-gauges {
+    gap: 5px;
+  }
+
+  .digit-gauge {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+    font-size: 0.7rem;
+  }
+
+  .digit-bar-outer {
+    height: 64px;
+  }
+
+  /* Drop the word "Digit" so only the number shows under each bar */
+  .digit-word {
+    display: none;
+  }
+
+  .explanations {
+    padding: 1rem 0.85rem;
+  }
+
+  .code-container pre {
+    font-size: 0.8rem;
+  }
 }
 </style>
