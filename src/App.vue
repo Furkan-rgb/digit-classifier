@@ -196,7 +196,9 @@
       this model. After training, the model is converted to
       <code>TensorFlow.js</code> format so it can run directly in your browser:
     </p>
-    <div class="code-container">
+    <details class="code-details">
+      <summary>Show training code</summary>
+      <div class="code-container">
       <pre><code>
 import os
 os.environ["TF_USE_LEGACY_KERAS"] = "1"
@@ -281,7 +283,8 @@ if __name__ == "__main__":
     tfjs.converters.save_keras_model(trained_model, "tfjs_model")
     print("Saved TensorFlow.js model to frontend/public/tfjs_model")
       </code></pre>
-    </div>
+      </div>
+    </details>
     <p>
       Finally, the model is loaded (<code>model.json</code>) on the front end
       and run inference on the drawing you create in the canvas.
@@ -724,10 +727,24 @@ function getGaugeLineWidth(prob) {
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Collapsible wrapper so the long training code stays out of the way
+   (especially on phones) until a visitor chooses to expand it */
+.code-details {
+  margin-top: 1rem;
+}
+
+.code-details > summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  user-select: none;
+  list-style: revert; /* keep the native disclosure triangle */
+}
+
 .code-container {
   background-color: #f5f5f5;
   padding: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   border-radius: 6px;
   overflow-x: auto; /* Horizontal scrolling for wide code */
 }
@@ -752,16 +769,33 @@ function getGaugeLineWidth(prob) {
     gap: 1.5rem;
   }
 
-  .canvas-column,
-  .pipeline-column {
+  .canvas-column {
     min-width: 0;
     width: 100%;
     max-width: 320px;
+    order: 1; /* canvas + predicted digit first */
   }
 
-  /* Let the 10 gauges share the available width instead of overflowing */
+  /* Flatten the pipeline column so the confidence bars and the network
+     diagram can be ordered independently of the canvas */
+  .pipeline-column {
+    display: contents;
+  }
+
+  /* Confidence bars sit right under the canvas; the decorative network
+     diagram drops below them */
   .digit-gauges {
+    order: 2;
+    width: 100%;
+    max-width: 320px;
     gap: 5px;
+  }
+
+  .cnn-overview.vertical {
+    order: 3;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 0.5rem;
   }
 
   .digit-gauge {
