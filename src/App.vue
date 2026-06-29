@@ -68,7 +68,7 @@
       </div>
 
       <div class="net-section layer-container">
-        <span class="panel-caption">Layer 1 · 16 feature maps</span>
+        <span class="panel-caption">Feature maps · 16 filters</span>
         <div class="map-grid">
           <canvas
             v-for="n in 16"
@@ -79,21 +79,10 @@
         </div>
       </div>
 
-      <div class="net-section layer-container">
-        <span class="panel-caption">Layer 2 · 32 feature maps</span>
-        <div class="map-grid">
-          <canvas
-            v-for="n in 32"
-            :key="'l2-' + n"
-            :width="mapWidth"
-            :height="mapHeight"
-          ></canvas>
-        </div>
-      </div>
-
       <p class="net-hint">
-        Each tile is one convolutional filter's response to your digit. Colors
-        run cool to warm — dark purple is no response, bright orange and yellow
+        Each tile shows how one of the 16 first-layer filters responds to your
+        digit — most latch onto a particular edge or stroke direction. Colors
+        run cool to warm: dark purple is no response, bright orange and yellow
         are strong activations. Draw above to watch them light up.
       </p>
     </div>
@@ -381,15 +370,11 @@ async function runInference() {
   // Argmax => predicted digit
   prediction.value = probs.indexOf(Math.max(...probs));
 
-  // Activation maps
+  // Activation maps (first conv block only; c2 is no longer displayed)
   activationMaps.value = [];
   if (c1) {
     const c1Data = await c1.data();
     activationMaps.value.push(extractConv2DActivationMaps(c1Data, c1.shape));
-  }
-  if (c2) {
-    const c2Data = await c2.data();
-    activationMaps.value.push(extractConv2DActivationMaps(c2Data, c2.shape));
   }
 
   tf.dispose([inputTensor, results, logits, c1, c2]);
@@ -636,19 +621,22 @@ function drawInputPreview(inputBuffer) {
   background: #000;
 }
 
+/* 16 filters laid out as a tidy 4×4 grid */
 .map-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .map-grid canvas {
-  width: 40px;
-  height: 40px;
-  background: #111;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  background: #000004; /* matches the colormap's "no response" end */
   display: block;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .net-hint {
@@ -731,9 +719,8 @@ function drawInputPreview(inputBuffer) {
     height: 72px;
   }
 
-  .map-grid canvas {
-    width: 34px;
-    height: 34px;
+  .map-grid {
+    max-width: 280px;
   }
 
   .digit-gauge {
