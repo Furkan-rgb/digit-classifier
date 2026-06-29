@@ -81,7 +81,7 @@
 
       <p class="net-hint">
         Each tile shows how one of the 16 first-layer filters responds to your
-        digit — most latch onto a particular edge or stroke direction. Colors
+        digit. Most latch onto a particular edge or stroke direction. Colors
         run cool to warm: dark purple is no response, bright orange and yellow
         are strong activations. Draw above to watch them light up.
       </p>
